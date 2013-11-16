@@ -1,0 +1,60 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #555;
+}
+
+a { 
+    text-decoration: none; 
+    color: #4974a0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error { 
+    color: red; 
+}
+
+#header {
+    font-size: 1em;
+    padding: 1em;
+    margin-top: 0;
+    margin-bottom: 5em;
+    background: #c5120e;
+}
+
+#header a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#login-form {
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5em;
+    border: 1px solid #ccc;
+    background: #eee;
+}
+
+#login-form input,
+#login-form select {
+    width: 100%;
+    font-size: 1em;
+}
+
+#login-form .login-submit {
+    width: 20%;	
+}
+
+#footer {
+    margin-top: 5em;
+    padding-top: 1em;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.8em;
+}

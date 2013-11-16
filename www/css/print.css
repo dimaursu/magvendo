@@ -1,0 +1,37 @@
+body {
+    padding: 5px;
+}
+
+h1, 
+h2, 
+h3 {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.ls-table .actions,
+.top-menu .logout,
+#menu,
+#sider,
+#vendor-page .products-list,
+.vendor-menu,
+.period,
+.print-button,
+#select-products {
+    display: none;
+}
+
+.ls-table td
+{
+    padding: 2px;
+}
+
+.top-menu {
+    list-style-type: none;
+}
+
+#content {
+    margin: 0;
+    padding: 0;
+}

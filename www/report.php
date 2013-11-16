@@ -87,11 +87,10 @@ send_email($report_file);
 function send_email($report_file)
 {
     $name = "Oxana Julea";
-    $email = "iurie@sv-ti.com";
+    $email = "svti31416@gmail.com";
     $to = $name . "<". $email. ">";
-    $from = "MagSales <webmaster@crystal.md>";
-    $subject = "Report from MagSales";
-    $message = "Report from MagSales. Se attached CSV file.";
+    $from = "<webmaster@crystal.md>";
+    $subject = "Report ...";
     $file_content = file_get_contents($report_file);
     $file_content = chunk_split(base64_encode($file_content));
     $uid = md5(uniqid(time()));
@@ -111,7 +110,7 @@ function send_email($report_file)
     $header .= $file_content . "\r\n\r\n";
     $header .= "--" . $uid . "--"; 
 
-    if (!mail($to, $subject, $message, $header)) 
+    if (!mail($to, $subject, "Here message", $header)) 
       {
           echo "Report have not been sent.\n";
       }

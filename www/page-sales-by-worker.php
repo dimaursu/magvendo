@@ -97,7 +97,7 @@ else
              <?php for ($date = $date_to; strtotime($date) >= strtotime($date_from); $date = date('Y-m-d', strtotime(' -1 day', strtotime($date)))) : ?>
                  <?php $sum_by_date = get_sum_by_date($date, $_SESSION['magazine_id']); ?>
                <?php if($sum_by_date['sales_sum']+$sum_by_date['repared_sum'] != 0) : ?>  
-                 <?php $worker = get_user($sum_by_date['user_id']);;?>
+                 <?php $worker = get_user($sum_by_date['user_id']); ?>
                  <tr>
                    <td><?php echo $date; ?></td>
                    <td><?php echo ceil($sum_by_date['sales_sum']); ?></td>

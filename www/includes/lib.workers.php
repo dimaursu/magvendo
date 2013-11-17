@@ -591,4 +591,3 @@ function get_sum_by_date($date, $magazine_id)
 
     return $sum;
 }
-

@@ -147,7 +147,7 @@ function sales_sum($date_from, $date_to, $magazine_id)
  */
 function save_sale()
 {
-    global $config; 
+    global $config;
 
     // Verify name variable.
     if (empty($_POST['name']))
@@ -161,13 +161,16 @@ function save_sale()
           return _tr("Price field is empty.");
       }
 
-
     // Verify if price variable is numeric.
     if (!is_numeric($_POST['price']))
       {
           return _tr("Price field must by a number.");
       }
 
+    if (!empty($_POST['salary_percent']) && !is_numeric($_POST['salary_percent']))
+      {
+          return _tr("Percent from sale must be a number.");
+      }
 
      // Create data fields.
     $fields[] = "`name` = '".$_POST['name']."'";
@@ -180,12 +183,16 @@ function save_sale()
       {
           $fields[] = "`discount` = '".$_POST['discount']."'";
       }
+    if (!empty($_POST['salary_percent']))
+      {
+          $fields[] = "`salary_percent` = '".$_POST['salary_percent']."'";
+      }
     if (!empty($_POST['date']))
-      { 
+      {
           $fields[] = "`date` = '".date('Y-m-d H:i:s', strtotime($_POST['date']))."'";
       }
     else
-      {  
+      {
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
     $fields[] = "`magazine_id` = '".$_SESSION['magazine_id']."'";    

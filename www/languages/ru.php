@@ -112,6 +112,9 @@ $language = array(
 'Days' =>
 'Дней',
 
+'Percent from sale' =>
+'Процент с продажы',
+
 /**
  * Login page.
  */
@@ -166,6 +169,9 @@ $language = array(
 
 'Price should be a number.' =>
 'Цена должно быть числом.',
+
+'Percent from sale must be a number.' =>
+'Процент с продажы должен быть числом.',
 
 'Quantity' =>
 'Количество',

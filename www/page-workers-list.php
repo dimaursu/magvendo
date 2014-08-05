@@ -65,7 +65,7 @@ else if (!empty($_GET['s']))
   <div class="period">  
         <h3><?php _e('Period'); ?></h3>
         <form enctype="multipart/form-data" action="<?php $url; ?>" method="post">
-            <p><?php _e('From'); ?><input class="date" type="date" name="date-begin"> <?php _e('To'); ?> <input class="date" type="date" name="date-end"></p>
+            <p><?php _e('From'); ?><input class="date" type="text" name="date-begin"> <?php _e('To'); ?> <input class="date" type="text" name="date-end"></p>
             <input class="show-button" type="submit" name="show" value="<?php _e('Show'); ?>">
         </form>
   </div> <!-- .period -->

@@ -73,7 +73,7 @@ else
             <input type="radio" name="last-period"  <?php if($period == 'week') : ?>checked="checked"<?php endif; ?> value="week"><?php _e('Last week'); ?> 
             <input type="radio" name="last-period"  <?php if($period == 'month') : ?>checked="checked"<?php endif; ?> value="month"><?php _e('Last month'); ?>
             <input type="radio" name="last-period"  <?php if($period == 'three-months') : ?>checked="checked"<?php endif; ?> value="three-months"><?php _e('Last 3 months'); ?> <br>
-            <p><?php _e('From'); ?><input class="date" type="date" name="date-begin"> <?php _e('To'); ?> <input class="date" type="date" name="date-end"></p>
+            <p><?php _e('From'); ?><input class="date" type="text" name="date-begin"> <?php _e('To'); ?> <input class="date" type="text" name="date-end"></p>
             <input class="show-button" type="submit" name="show" value="<?php _e('Show'); ?>">
         </form>
   </div> <!-- .period -->

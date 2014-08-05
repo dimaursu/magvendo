@@ -53,7 +53,7 @@
             <?php _e('Date'); ?>:
         </td>
         <td>
-            <input class="date" type="number" name="date" 
+            <input class="date" type="text" name="date" 
             value="<?php if(!empty($error) && !empty($_POST['date']) ) : ?><?php echo $_POST['date']; ?><?php endif; ?>" />
         </td>
     </tr>

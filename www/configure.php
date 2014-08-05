@@ -3,7 +3,7 @@
 /**
  * File name: configure.php
  * Copyright 2013 Iurie Nistor
- * This file is part of LightStore.
+ * This file is part of Magsales.
  *
  * LightStore is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,9 +20,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+$config = array();
+
 // Database information.
 $config['hostname'] = 'localhost';
-$config['database'] = 'magsales';
+$config['database'] = 'crystal';
 $config['db_username'] = 'root';
 $config['db_password'] = 'cactus';
 $config['db_prefix'] = 'mag_';

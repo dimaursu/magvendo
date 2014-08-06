@@ -108,8 +108,8 @@ function save_repared()
       {  
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
-    $fields[] = "`magazine_id` = '".$_SESSION['magazine_id']."'";    
-    $fields[] = "`user_id` = '".$_SESSION['user_id']."'";    
+    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";    
+    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";    
 
     // Prepare query for adding new sale to database. 
     $query = "INSERT INTO `".$config['db_prefix']."repared` 

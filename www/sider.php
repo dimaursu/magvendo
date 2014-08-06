@@ -1,5 +1,5 @@
 <div id="sider"> 
-<?php if (isset($_SESSION['magazine_id'])) : ?>
+<?php if (isset($_SESSION['magsales']['magazine_id'])) : ?>
   <?php if(has_worker_role(SALE)) : ?>
     <h2><?php _e('Sales'); ?></h2>
     <ul>
@@ -23,7 +23,7 @@
   <?php endif; ?>
   <h2><?php _e('Salary'); ?></h2>
 
-  <?php $salary = get_worker_salary(date('Y-m-d'), date('Y-m-d'), $_SESSION['magazine_id'], $_SESSION['user_id']); ?>
+  <?php $salary = get_worker_salary(date('Y-m-d'), date('Y-m-d'), $_SESSION['magsales']['magazine_id'], $_SESSION['magsales']['user_id']); ?>
   <ul>
     <?php if(isset($salary['sale'])) : ?>
         <li><b><?php _e('Sales'); ?>: </b><?php echo $salary['sale']; ?></li>
@@ -48,6 +48,8 @@
       <li><a href="index.php?p=sales-by-worker"><?php _e('Sales'); ?></a></li>
       <li><a href="index.php?p=workers-list"><?php _e('Workers list'); ?> (<?php echo users_number(); ?>)</a></li>
       <li><a href="index.php?p=magazines"><?php _e('Magazines'); ?></a></li> 
+      <li><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a></li> 
+      <li><a href="index.php?p=categories"><?php _e('Categories'); ?></a></li> 
     </ul>
 
 <?php endif; ?>

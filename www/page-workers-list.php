@@ -24,40 +24,6 @@ if (isset($_POST['show']))
         } 
 }
 
-// Verify actions.
-/*if (isset($_GET['a']) 
-    && $_GET['a'] == 'delete' 
-    && isset($_GET['id']) 
-    && is_numeric($_GET['id']))
-  {
-      // Remove worker.
-      remove_worker($_GET['id']);
-  }*/
-
-/*if (isset($_GET['page']) && is_numeric($_GET['page']))
-  {
-      $page = $_GET['page'];
-  }
-else
-  {
-      $page = 1;
-  } 
-
-$conditions = array();*/
-
-// Verify search post variable.
-/*if (!empty($_POST['search']))
-  {
-      $conditions['search'] = $_POST['search-input'];
-      $url .= "&s=".$_POST['search-input'];
-  } 
-else if (!empty($_GET['s']))
-  {
-      $conditions['search'] = $_GET['s'];
-      $url .= "&s=".$_GET['s'];
-  }
-*/
-
 ?>
 
 <h2><?php _e('Workers list'); ?></h2>
@@ -75,7 +41,7 @@ else if (!empty($_GET['s']))
          <input type="search" name="search-input" autofocus="autofocus" placeholder="<?php _e('Search by workername or name'); ?>" value="" /> 
          <input type="submit" class="search-button" name="search" value="<?php _e('Search'); ?>" /> 
     </form></p-->
-    <?php $workers = get_workes(); ?> 
+    <?php $workers = get_workes($_SESSION['magsales']['magazine_id']); ?> 
     <p><b><?php _e('Period'); ?>: <?php echo date("d-m-Y", strtotime($date_from)).' &mdash; '.date("d-m-Y", strtotime($date_to)); ?></b></p>
     <table class="ls-table">
        <tr>
@@ -85,13 +51,13 @@ else if (!empty($_GET['s']))
        </tr>
        <?php if (!empty($workers)) : ?>
            <?php foreach($workers as $key => $worker) : ?>      
-           <?php $worker_roles = get_worker_roles($worker['id'], $_SESSION['magazine_id']); ?>
+           <?php $worker_roles = get_worker_roles($worker['id'], $_SESSION['magsales']['magazine_id']); ?>
          <?php if (!empty($worker_roles)) : ?>      
-           <?php  $worker['worked_days'] = worked_days($worker['id'], $_SESSION['magazine_id'], $date_from, $date_to); ?>
+           <?php  $worker['worked_days'] = worked_days($worker['id'], $_SESSION['magsales']['magazine_id'], $date_from, $date_to); ?>
             <tr <?php if ($key % 2 == 0) : ?>class="even"<?php endif; ?>>
                <td><b><?php echo $worker['name']; ?></b></td> 
                <td>
-                 <?php $worker_salary = get_worker_salary($date_from, $date_to, $_SESSION['magazine_id'], $worker['id']); ?> 
+                 <?php $worker_salary = get_worker_salary($date_from, $date_to, $_SESSION['magsales']['magazine_id'], $worker['id']); ?> 
                  <table class="worker-roles">
                    <tr>  
                      <th><? _e('Worker role'); ?></th>
@@ -127,7 +93,7 @@ else if (!empty($_GET['s']))
                            <?php if ($worker_role['work_role'] == SALE) : ?>
                                <?php echo $worker_salary['sale']; ?>
                            <?php elseif ($worker_role['work_role'] == REPARE) : ?>
-                               <?php echo $worker_salary['repared']+$worker_salary['repared_sales_percent']; ?>
+                               <?php echo $worker_salary['repared'] + $worker_salary['repared_sales_percent']; ?>
                            <?php elseif ($worker_role['work_role'] == FABRICATE) : ?>
                                <?php echo $worker_salary['fabricated']; ?> 
                            <?php endif; ?>                             

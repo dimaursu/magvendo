@@ -12,6 +12,14 @@
     <link type="text/css" href="js/jnotify/jquery.jnotify.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jnotify/jquery.jnotify.js"></script>
 
+     <?php if (isset($_GET['p']) && $_GET['p'] == "statistics") : ?>
+    <script type="text/javascript" src="js/jqplot/jquery.jqplot.min.js"></script> 
+    <link type="text/css" href="js/jqplot/jquery.jqplot.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+     <?php endif; ?>
 
 <script>
      <?php if(LSLANG == "ru") : ?>
@@ -56,12 +64,12 @@ var old_goToToday = $.datepicker._gotoToday
 
 <div id="header">
     <ul class="top-menu">
-        <?php $user_data = get_user($_SESSION['user_id']); ?>
+        <?php $user_data = get_user($_SESSION['magsales']['user_id']); ?>
         <li><a class="user" href="#"><b><?php if (!empty($user_data['name'])) : ?><?php echo $user_data['name']; ?><?php else : ?><?php echo $user_data['username']; ?><?php endif; ?></b></a></li>
         <li><a class="logout" href="index.php?a=logout"><?php _e('Log out'); ?></a></li> 
     </ul>
-    <?php if (isset($_SESSION['magazine_id'])) : ?>
-        <?php $magazine = get_magazine($_SESSION['magazine_id']); ?>
+    <?php if (isset($_SESSION['magsales']['magazine_id'])) : ?>
+        <?php $magazine = get_magazine($_SESSION['magsales']['magazine_id']); ?>
     <?php endif; ?>
     <h1><a href="index.php">Mag Sales</a><?php if(!empty($magazine)) : ?> <span> | <?php echo $magazine['name']; ?></span><?php endif; ?></h1>
 </div> <!-- #header -->

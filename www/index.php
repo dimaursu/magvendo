@@ -30,7 +30,7 @@ require_once 'configure.php';
 session_start();
 
 // Verify login.
-if (!isset($_SESSION['login']))
+if (!isset($_SESSION['magsales']['login']))
   {
       header('Location: login.php');
   }
@@ -51,6 +51,7 @@ require_once 'includes/lib.workers.php';
 require_once 'includes/lib.vendors.php';
 require_once 'includes/lib.products.php';
 require_once 'includes/lib.categories.php';
+require_once 'includes/lib.statistics.php';
 
 // Connect to the database.
 $db_link = @mysql_connect(
@@ -96,11 +97,8 @@ if (!@mysql_query('SET names utf8'))
 if (isset($_GET['a']) && $_GET['a'] == 'logout')
   {
       // Remove session data.
-      unset($_SESSION['login']);
-      unset($_SESSION['user_id']);
-      unset($_SESSION['magazine_id']); 
-      unset($_SESSION['user_role']);
-      
+      unset($_SESSION['magsales']);
+
       // Redirect to login page.
       header('Location: login.php');
   }
@@ -132,7 +130,25 @@ if (empty($_GET['p']))
   }
 else
  {
-     $page = 'page-'.$_GET['p'].".php";
+     $restricted = array(
+         'magazines',
+         'statistics',
+         'workers-list',
+         'sales-all',
+         'categories',
+         'add-category',
+         'edit-category',
+         'stats-price'
+     );
+
+     $pagename = $_GET['p'];
+
+     if (user_role() != ADMIN_ROLE && in_array($pagename, $restricted))
+       {
+           $pagename = 'restricted';
+       }
+
+     $page = 'page-' . $pagename . ".php";
 
      // Verify if page exit.
      if (!file_exists($page))

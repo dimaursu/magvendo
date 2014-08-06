@@ -192,3 +192,16 @@ function remove_category($id)
 
     @mysql_query($query);
 }
+
+function get_months($from, $to)
+{
+     $date = $from;
+     while (strtotime($date) < strtotime($to))
+        {
+            $months[] = date('Y-m', strtotime($date));
+	    $newdate = strtotime('+1 month', strtotime($date));
+            $date = date('Y-m-d', $newdate);
+	 }
+
+    return $months;
+}

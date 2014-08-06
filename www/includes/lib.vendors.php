@@ -388,7 +388,7 @@ function remove_product($vendor_id, $type = '')
          $fields[] = "`vendor_id` = '".$product['vendor_id']."'";
          $fields[] = "`price` = '".$product['price']."'";
          $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";
-         $fields[] = "`user_id` = '".$_SESSION['user_id']."'";
+         $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";
 
 
         // Insert data.

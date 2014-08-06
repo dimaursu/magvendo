@@ -126,9 +126,12 @@ else
                   {
                        $products_sold = get_sales($date_from, $date_to);
                   }
-                $total = 0; 
-                $date = '';
+
+                $total = 0;
                 $total_by_date = 0;
+                $date = '';
+                $salary_total = 0;
+                $salary_by_date = 0;
                 $days = 0;
              ?>
 

@@ -115,6 +115,9 @@ $language = array(
 'Percent from sale' =>
 'Процент с продажы',
 
+'Percent' =>
+'Процент',
+
 /**
  * Login page.
  */
@@ -285,6 +288,10 @@ $language = array(
 /**
  * Side bar.
  */
+
+'Statistics' =>
+'Статистика',
+
 'Vendors' =>
 'Реализаторы',
 

@@ -14,11 +14,15 @@
     <table>
     <tr>
         <td class="first">
+          <?php $categories = get_categories(); ?>
             <?php _e('Product name'); ?><sup>*</sup>:
         </td>
         <td>
-            <input type="text" name="name" autofocus="autofocus" 
-                value="<?php if(!empty($error) && !empty($_POST['name']) ) : ?><?php echo $_POST['name']; ?><?php endif; ?>">
+          <select name="product">
+             <?php foreach ($categories as $category) : ?>
+                 <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+             <?php endforeach; ?>
+          </select>
         </td>
     </tr>
     <tr>

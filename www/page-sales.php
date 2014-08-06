@@ -7,7 +7,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && user_role() == ADMIN_ROLE)
   }
 else 
   {
-      $user_id = $_SESSION['user_id'];     
+      $user_id = $_SESSION['magsales']['user_id'];     
   }
 
 
@@ -78,7 +78,7 @@ else
 
 <div id="sales-list">
   <h2><?php _e("Sales list"); ?></h2>  
-  <?php if ($user_id != $_SESSION['user_id']) : /* Don't show information for the current logged user */ ?>
+  <?php if ($user_id != $_SESSION['magsales']['user_id']) : /* Don't show information for the current logged user */ ?>
       <?php $worker_detals = get_user($user_id); ?>
       <h3><?php _e('Worker'); ?> : <a href="index.php?p=user&id=<?php echo $user_id; ?>"><?php echo $worker_detals['name'] ?></a></h3>
   <?php endif; ?>
@@ -105,12 +105,15 @@ else
                <th><?php _e('Sum, Lei'); ?></th>
                <th><?php _e('Salary, Lei'); ?></th> 
                <th class="actions"><?php _e('Actions'); ?></th>
-             </tr> 
+             </tr>
+ 
              <?php 
-                $products_sold = get_sales($date_from, $date_to, $user_id, $_SESSION['magazine_id']);
-                $total = 0; 
-                $date = '';
+                $products_sold = get_sales($date_from, $date_to, $user_id, $_SESSION['magsales']['magazine_id']);
+                $total = 0;
                 $total_by_date = 0;
+                $date = '';
+                $salary_total = 0;
+                $salary_by_date = 0;
                 $days = 0;
              ?>
 
@@ -121,7 +124,7 @@ else
                          <tr>
                            <td></td><td><td></td></td><td></td>
                            <td class="total_by_date"><?php echo $total_by_date; ?></td>
-                           <td><?php echo floor($total_by_date*0.1); $total_by_date = 0; ?></td>
+                           <td><?php echo floor($salary_by_date); $salary_by_date = 0; ?></td>
                            <td></td> 
                          </tr>
                      <?php endif; ?>
@@ -136,7 +139,14 @@ else
                    <td>
                      <?php echo $sum; ?>
                    </td>
-                   <td></td>
+                   <td>
+                       <?php if($product_sold['salary_percent'] == 0) : ?>
+		           <?php echo $salary = floor($sum * 0.1); ?>
+		       <?php else :?>
+                           <?php echo $salary = floor($sum * 0.01 * $product_sold['salary_percent']); ?>
+		           (<?php echo $product_sold['salary_percent']; ?> %)
+		       <?php endif; ?>
+                   </td>
                    <td class="actions">
                      <form enctype="multipart/form-data"  action="<?php echo $url; ?>" method="post"> 
                        <input class="delete" type="submit" name="delete" value = "<?php _e('Delete'); ?>"/>
@@ -146,6 +156,8 @@ else
                  </tr>
                  <?php $total += $sum; ?> 
                  <?php $total_by_date += $sum; ?> 
+                 <?php $salary_by_date += $salary; ?> 
+                 <?php $salary_total += $salary; ?> 
                  <?php endforeach; ?>
                  <?php if($total_by_date > 0) : ?>   
                      <tr>
@@ -154,7 +166,7 @@ else
                        <td></td>
                        <td></td>
                        <td class="total_by_date"><?php echo $total_by_date; ?></td>
-                       <td><?php echo floor($total_by_date*0.1); $total_by_date = 0; ?></td>
+                       <td><?php echo floor($salary_by_date); $salary_by_date = 0; ?></td>
                        <td></td>
                      </tr>
                  <?php endif; ?>
@@ -162,7 +174,7 @@ else
                   <td></td><td></td><td></td>
                   <td><b><?php _e('Total'); ?>: </b></td>
                   <td><b><?php echo $total; ?></b></td>
-                  <td><?php echo floor($total*0.1); ?></td>
+                  <td><?php echo floor($salary_total); ?></td>
                  </tr>
                 <tr class="total"><td></td><td></td><td></td><td><b><?php _e('Days'); ?>: </b></td><td></td><td><b><?php echo $days; ?></b></td></tr>
          </table>

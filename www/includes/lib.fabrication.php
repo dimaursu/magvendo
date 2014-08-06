@@ -105,8 +105,8 @@ function save_fabricated()
       {  
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
-    $fields[] = "`magazine_id` = '".$_SESSION['magazine_id']."'";    
-    $fields[] = "`user_id` = '".$_SESSION['user_id']."'";    
+    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";    
+    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";    
 
     // Prepare query. 
     $query = "INSERT INTO `".$config['db_prefix']."fabricated` 

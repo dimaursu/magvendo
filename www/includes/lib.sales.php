@@ -27,41 +27,49 @@ function get_sales($date_from, $date_to, $user_id = '', $magazine_id = '')
     if (!empty($user_id) && !empty($magazine_id))
       {
           // Prepare query to get the user sales from a magazine. 
-          $query = "SELECT `id`, `name`, `price`, `quantity`, 
-             `discount`, `magazine_id`, `user_id`, CAST(`date` AS DATE) as `date` 
-              FROM `".$config['db_prefix']."sales`  
-              WHERE CAST(`date` AS DATE) >= '".$date_from."'
-              AND `user_id` = '".$user_id."' AND `magazine_id` = '".$magazine_id."' 
-              AND CAST(`date` AS DATE) <= '".$date_to."' ORDER BY `date` DESC";   
+          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, 
+              s.discount, s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
+              s.salary_percent
+              FROM ".$config['db_prefix']."sales s 
+              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              WHERE CAST(s.date AS DATE) >= '".$date_from."'
+              AND s.user_id = '".$user_id."' AND s.magazine_id = '".$magazine_id."' 
+              AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC";   
       }
     else if (empty($user_id) && !empty($magazine_id))
      {
           // Prepare query to get the sales from a magazine. 
-          $query = "SELECT `id`, `name`, `price`, `quantity`, `discount`,
-              `magazine_id`, `user_id`, CAST(`date` AS DATE) as `date` 
-              FROM `".$config['db_prefix']."sales`  
-              WHERE CAST(`date` AS DATE) >= '".$date_from."'
-              AND `magazine_id` = '".$magazine_id."' 
-              AND CAST(`date` AS DATE) <= '".$date_to."' ORDER BY `date` DESC";   
+          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount,
+              s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
+              s.salary_percent
+              FROM ".$config['db_prefix']."sales s  
+              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              WHERE CAST(s.date AS DATE) >= '".$date_from."'
+              AND s.magazine_id = '".$magazine_id."' 
+              AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC";   
      }
     else if (!empty($user_id) && empty($magazine_id))
      {
           // Prepare query to get the users sales from all magazines. 
-          $query = "SELECT `id`, `name`, `price`, `quantity`, `discount`, 
-              `magazine_id`, `user_id`, CAST(`date` AS DATE) as `date` 
-              FROM `".$config['db_prefix']."sales`  
-              WHERE CAST(`date` AS DATE) >= '".$date_from."'
-              AND `user_id` = '".$user_id."' 
-              AND CAST(`date` AS DATE) <= '".$date_to."' ORDER BY `date` DESC"; 
+          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount, 
+              s.magazine_id, s.user_id, CAST(s.date AS DATE) as date, 
+              s.salary_percent
+              FROM ".$config['db_prefix']."sales s  
+              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              WHERE CAST(s.date AS DATE) >= '".$date_from."'
+              AND s.user_id = '".$user_id."' 
+              AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC"; 
      }
     else
      {
           // Prepare query to get all sales from all magazines. 
-          $query = "SELECT `id`, `name`, `price`, `quantity`, `discount`,
-              `magazine_id`, `user_id`, CAST(`date` AS DATE) as `date` 
-              FROM `".$config['db_prefix']."sales`  
-              WHERE CAST(`date` AS DATE) >= '".$date_from."'
-              AND CAST(`date` AS DATE) <= '".$date_to."' ORDER BY `date` DESC"; 
+          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount,
+              s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
+              s.salary_percent
+              FROM ".$config['db_prefix']."sales s  
+              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              WHERE CAST(s.date AS DATE) >= '".$date_from."'
+              AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC"; 
      }
 
     // Select sales.
@@ -150,7 +158,7 @@ function save_sale()
     global $config;
 
     // Verify name variable.
-    if (empty($_POST['name']))
+    if (empty($_POST['product']))
       {
           return _tr("Name field is empty.");
       }
@@ -172,8 +180,15 @@ function save_sale()
           return _tr("Percent from sale must be a number.");
       }
 
+    $product = get_category($_POST['product']);
+
+    if (empty($product))
+      {
+          return _tr("There is no such product");
+      }
+
      // Create data fields.
-    $fields[] = "`name` = '".$_POST['name']."'";
+    $fields[] = "`product_id` = '" . $product['id'] . "'";
     $fields[] = "`price` = '".$_POST['price']."'";
     if (!empty($_POST['quantity']) && is_numeric($_POST['quantity']))
       {
@@ -195,8 +210,8 @@ function save_sale()
       {
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
-    $fields[] = "`magazine_id` = '".$_SESSION['magazine_id']."'";    
-    $fields[] = "`user_id` = '".$_SESSION['user_id']."'";    
+    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";    
+    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";    
 
     if (!isset($_GET['id']) || !is_numeric($_GET['id']))
       {

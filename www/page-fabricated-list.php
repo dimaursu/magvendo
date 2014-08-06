@@ -7,7 +7,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && user_role() == ADMIN_ROLE)
   }
 else 
  {
-      $user_id = $_SESSION['user_id'];     
+      $user_id = $_SESSION['magsales']['user_id'];     
  }
 
 // Verify page variable.
@@ -78,7 +78,7 @@ else
 
 <div id="sales-list">
   <h2><?php _e("Fabricated products"); ?></h2>  
-  <?php if ($user_id != $_SESSION['user_id']) : /* Don't show information for the current logged user */ ?>
+  <?php if ($user_id != $_SESSION['magsales']['user_id']) : /* Don't show information for the current logged user */ ?>
       <?php $worker_detals = get_user($user_id); ?>
       <h3><?php _e('Worker'); ?> : <a href="index.php?p=user&id=<?php echo $user_id; ?>"><?php echo $worker_detals['name'] ?></a></h3>
   <?php endif; ?>
@@ -105,7 +105,7 @@ else
                <th class="actions"><?php _e('Actions'); ?></th>
              </tr> 
              <?php 
-                $products = get_fabricated($date_from, $date_to, $user_id, $_SESSION['magazine_id']);
+                $products = get_fabricated($date_from, $date_to, $user_id, $_SESSION['magsales']['magazine_id']);
                 $date = '';
                 $salary_total = 0;
                 $salary_by_date = 0;
@@ -126,7 +126,7 @@ else
                    <td><?php echo $product['name']; ?></td>
                    <td><?php echo $product['quantity']; ?></td>
                    <td><?php echo $product['salary']; ?></td>
-                   <?php $salary = floor($product['salary']*$product['quantity']); ?>
+		<?php $salary = round($product['salary']*$product['quantity'], 2, PHP_ROUND_HALF_DOWN); ?>
                    <td><?php echo $salary; ?></td>
                    <td class="actions">
                      <form enctype="multipart/form-data"  action="<?php echo $url; ?>" method="post"> 

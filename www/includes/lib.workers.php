@@ -51,26 +51,33 @@ $work_roles_page_url = array(
  * @return
  *   An array of workes data.
  */
+function get_workers($magazine_id = '')
+{
+    return get_workes($magazine_id);
+}
 function get_workes($magazine_id = '')
 {
     global $config;
 
-    // Define request query with category.
-    $query = "SELECT * FROM `".$config['db_prefix']."users`";
+    $where = "";
+    if (!empty($magazine_id))
+      {
+          $where = " WHERE w.magazine_id = " . $magazine_id;
+      }
 
-    // Select users.
-    $result = @mysql_query($query); 
+    $query = "SELECT * FROM ".$config['db_prefix']."users u
+         WHERE u.id IN (SELECT w.user_id FROM " . $config['db_prefix'] . "workers w
+         " . $where .")";
 
-   // Verify selection result.
+    $result = @mysql_query($query);
+
    if (!$result)
      {
-         // Return an empty array;
          return array();
-     }  
+     }
 
     $users = array();
 
-    // Fetch the result.
     while ($user = @mysql_fetch_array($result, MYSQL_ASSOC))
       {
           $users[] = $user;
@@ -141,12 +148,12 @@ function has_worker_role($role, $user_id = '', $magazine_id = '')
 
     if (empty($magazine_id))
       {
-          $magazine_id = $_SESSION['magazine_id'];
+          $magazine_id = $_SESSION['magsales']['magazine_id'];
       }
 
     if (empty($user_id))
       {
-          $user_id = $_SESSION['user_id'];
+          $user_id = $_SESSION['magsales']['user_id'];
       }
      
 
@@ -223,7 +230,7 @@ function has_magazine($id)
     global $config;
 
     $query = "SELECT COUNT(*) as `number` FROM `".$config['db_prefix']."workers` 
-        WHERE `user_id` = '".$_SESSION['user_id']."' AND `magazine_id` = '".$id."'";
+        WHERE `user_id` = '".$_SESSION['magsales']['user_id']."' AND `magazine_id` = '".$id."'";
  
     $result = @mysql_query($query);
 
@@ -397,7 +404,7 @@ function get_worker_salary($date_from, $date_to, $magazine_id, $user_id)
     // Calculate all sales sum int the magazine.
     $sales_sum = sales_sum($date_from, $date_to, $magazine_id); 
 
-    // Check if worker has REPARE role.
+    // Check if worker has SALE role.
     if (has_worker_role(SALE, $user_id, $magazine_id))
       {
           $sale_salary = worker_sales_salary(
@@ -417,7 +424,7 @@ function get_worker_salary($date_from, $date_to, $magazine_id, $user_id)
           );
 
           $salary['repared'] = floor($repared_salary);
-          $as_repared_role = 0.05*$sales_sum;
+          $as_repared_role = 0.05 * $sales_sum;
           $salary['repared_sales_percent'] = floor($as_repared_role);
       }
 
@@ -429,7 +436,7 @@ function get_worker_salary($date_from, $date_to, $magazine_id, $user_id)
           $fabricate_salary = worker_fabricated_salary(
               $date_from, $date_to, $magazine_id, $user_id
           );
-         $salary['fabricated'] = floor($fabricate_salary);
+	  $salary['fabricated'] = round($fabricate_salary, 2, PHP_ROUND_HALF_DOWN);
       }
 
     $salary['total_salary'] = 0;
@@ -452,7 +459,8 @@ function worker_sales_salary($date_from, $date_to, $magazine_id, $user_id)
 
     // Prepare query to get the user sales. 
     $query = "SELECT `price`, `quantity`, `discount`, 
-        CAST(`date` AS DATE) as `date` FROM `".$config['db_prefix']."sales`  
+        CAST(`date` AS DATE) as `date`, salary_percent 
+        FROM `".$config['db_prefix']."sales`  
         WHERE CAST(`date` AS DATE) >= '".$date_from."'
         AND CAST(`date` AS DATE) <= '".$date_to."'
         AND `magazine_id` = '".$magazine_id."' AND `user_id` = '".$user_id."'";  
@@ -466,17 +474,20 @@ function worker_sales_salary($date_from, $date_to, $magazine_id, $user_id)
          return 0;
      }  
 
-    $sum = 0;
+    $salary = 0;
 
     // Fetch the result.
     while ($sale = @mysql_fetch_array($result, MYSQL_ASSOC))
       {
-          $sum += $sale['quantity'] * 
-              $sale['price'] * 
-              (1-0.01*$sale['discount']);
+          $salary_percent =
+              !$sale['salary_percent'] ? 0.1 : 0.01 * $sale['salary_percent'];
+
+          $salary += floor($sale['quantity'] *
+              $sale['price'] *
+              (1 - 0.01 * $sale['discount']) * $salary_percent);
       }
 
-    return 0.1*$sum;
+    return $salary;
 }
 
 

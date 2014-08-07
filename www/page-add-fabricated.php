@@ -35,7 +35,7 @@
             <?php _e('Salary per object, Lei'); ?><sup>*</sup>:
         </td>
         <td>
-            <input type="number" name="salary" 
+            <input type="text" name="salary" 
             value="<?php if(!empty($error) && !empty($_POST['salary']) ) : ?><?php echo $_POST['salary']; ?><?php endif; ?>" />
         </td>
     </tr>
@@ -44,7 +44,7 @@
             <?php _e('Date'); ?>:
         </td>
         <td>
-            <input class="date" type="number" name="date" 
+            <input class="date" type="text" name="date" 
             value="<?php if(!empty($error) && !empty($_POST['date']) ) : ?><?php echo $_POST['date']; ?><?php endif; ?>" />
         </td>
     </tr>

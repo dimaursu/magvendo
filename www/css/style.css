@@ -263,7 +263,7 @@ select {
     margin-left: 1em;
 }
 
-.ls-table input[type="number"] {
+.ls-table input[type="text"] {
     width: 50px;
 }
 

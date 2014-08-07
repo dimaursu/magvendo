@@ -26,7 +26,7 @@
             <?php _e('Price'); ?><sup>*</sup>:
         </td>
         <td>
-            <input type="number" name="price" 
+            <input type="text" name="price" 
             value="<?php if(!empty($error) && !empty($_POST['price']) ) : ?><?php echo $_POST['price']; ?><?php endif; ?>" />
         </td>
     </tr>
@@ -35,7 +35,7 @@
             <?php _e('Salary percent'); ?><sup>*</sup>:
         </td>
         <td>
-            <input type="number" name="salary_percent" 
+            <input type="text" name="salary_percent" 
             value="<?php if(!empty($error) && !empty($_POST['salary_percent']) ) : ?><?php echo $_POST['salary_percent']; ?><?php endif; ?>" />
         </td>
     </tr>
@@ -44,7 +44,7 @@
             <?php _e('Date'); ?>:
         </td>
         <td>
-            <input class="date" type="number" name="date" 
+            <input class="date" type="text" name="date" 
             value="<?php if(!empty($error) && !empty($_POST['date']) ) : ?><?php echo $_POST['date']; ?><?php endif; ?>" />
         </td>
     </tr>

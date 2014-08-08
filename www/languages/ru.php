@@ -118,6 +118,12 @@ $language = array(
 'Percent' =>
 'Процент',
 
+'Percents' =>
+'Процент',
+
+'Sales percent (repare)' =>
+'Ремонт, %',
+
 /**
  * Login page.
  */

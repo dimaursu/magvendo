@@ -237,6 +237,12 @@ function remove_category($id)
         WHERE `id` = '".$id."'";
 
     @mysql_query($query);
+
+    // Define query.
+    $query = "DELETE FROM `".$config['db_prefix']."products_percents` 
+        WHERE `product_id` = '".$id."'";
+
+    @mysql_query($query);
 }
 
 function get_months($from, $to)

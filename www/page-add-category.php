@@ -21,6 +21,15 @@
                 value="<?php if(!empty($error) && !empty($_POST['name']) ) : ?><?php echo $_POST['name']; ?><?php endif; ?>" />
         </td>
     </tr>
+    <tr>
+        <td class="first">
+            <?php _e('Sales percent (repare)'); ?>:
+        </td>
+        <td>
+            <input type="text" name="repared"
+                value="<?php if(!empty($error) && !empty($_POST['repared']) ) : ?><?php echo $_POST['repared']; ?><?php endif; ?>" />
+        </td>
+    </tr>
     </tr>
         <td class="first">
             <?php _e('Description'); ?>:

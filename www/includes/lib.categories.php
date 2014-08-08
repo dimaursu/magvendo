@@ -43,9 +43,13 @@ function get_category($id)
       }
 
     // Define SQl request query.
-    $query = "SELECT * FROM `".$config['db_prefix']."categories` 
-    WHERE `id` = '".$id."'";
-           
+    $query = "SELECT c.id, c.name, c.description, pp.sell_percent,
+        IFNULL(pp.repare_percent, 5) as repare_percent, pp.fabricated_percent
+        FROM ".$config['db_prefix']."categories c
+        LEFT JOIN ".$config['db_prefix']."products_percents pp
+        ON c.id = pp.product_id
+        WHERE c.id = '".$id."'";
+
     // Select data.
     $result = @mysql_query($query); 
 
@@ -83,8 +87,12 @@ function get_categories($page = '', $args = array(), $items_per_page = 10)
      }  
 
     // Define request query with category.
-    $query = "SELECT * FROM `".$config['db_prefix']."categories` 
-             ORDER BY `name` ASC".$limit;
+    $query = "SELECT c.id, c.name, c.description, pp.sell_percent, 
+             IFNULL(pp.repare_percent, 5) as repare_percent, pp.fabricated_percent
+             FROM ".$config['db_prefix']."categories c
+             LEFT JOIN ".$config['db_prefix']."products_percents pp
+             ON c.id = pp.product_id
+             ORDER BY name ASC".$limit;
 
     // Select data.
     $result = @mysql_query($query); 
@@ -177,7 +185,45 @@ function save_category()
     if (!$result)
       {
           return _tr("An error occured. The category have been not saved.");
-      } 
+      }
+
+    if (!isset($_POST['repared']) || !is_numeric($_POST['repared']))
+      {
+          $percent = 5;
+      }
+    else
+      {
+          $percent = $_POST['repared'];
+      }
+
+    if (!isset($_GET['id']) || !is_numeric($_GET['id']))
+      {
+          $sql = "SELECT LAST_INSERT_ID() as id FROM "
+          . $config['db_prefix'] . "categories";
+
+          $result = @mysql_query($sql);
+          if (!$result)
+            {
+              return _tr("An error occured. The category have been not saved.");
+            }
+
+          $id = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+          $sql = "INSERT INTO " . $config['db_prefix']
+          . "products_percents (product_id, repare_percent)
+          VALUES (" . $id['id'] . ",'". $percent  ."')";
+      }
+    else
+      {
+          $sql = "UPDATE " . $config['db_prefix'] . "products_percents
+              SET repare_percent = '" . $percent  . "'
+              WHERE product_id = " . $_GET['id'];
+      }
+
+    if (!@mysql_query($sql))
+      {
+          return _tr("An error occured. The category have been not saved.");
+      }
 
     return '';
 }

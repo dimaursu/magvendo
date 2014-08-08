@@ -39,7 +39,7 @@ function mags_sales_by_products($args = array())
           $conditions[] = "s.user_id = " . $args['user'];
       }
 
-    if (!empty($args['magasine']))
+    if (!empty($args['magazine']))
       {
           $conditions[] = "s.magazine_id = " . $args['magazine'];
       }

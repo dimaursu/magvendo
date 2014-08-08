@@ -424,8 +424,13 @@ function get_worker_salary($date_from, $date_to, $magazine_id, $user_id)
           );
 
           $salary['repared'] = floor($repared_salary);
-          $as_repared_role = 0.05 * $sales_sum;
-          $salary['repared_sales_percent'] = floor($as_repared_role);
+	  /*          $as_repared_role = 0.05 * $sales_sum;*/
+          $args = array(
+	      'from' => $date_from,
+              'to' => $date_to,
+              'magazine' => $magazine_id
+          );
+          $salary['repared_sales_percent'] = floor(worker_sales_salary_for_repare($args));
       }
 
 
@@ -522,6 +527,55 @@ function worker_repared_salary($date_from, $date_to, $magazine_id, $user_id)
       }
 
     return $sum;
+}
+
+function worker_sales_salary_for_repare($args = array())
+{
+
+    global $config;
+
+    if (!empty($args['from']))
+      {
+          $conditions[] = "CAST(s.date AS DATE) >= '" . $args['from'] . "'";
+      }
+
+    if (!empty($args['to']))
+      {
+          $conditions[] = "CAST(s.date AS DATE) <= '" . $args['to'] . "'";
+      }
+
+    if (!empty($args['worker']))
+      {
+          $conditions[] = "s.user_id = " . $args['worker'];
+      }
+
+    if (!empty($args['magazine']))
+      {
+          $conditions[] = "s.magazine_id = " . $args['magazine'];
+      }
+
+    $where = "";
+
+    if (!empty($conditions))
+      {
+          $where = " WHERE " . implode(" AND ", $conditions);
+      }
+
+    $query = "SELECT SUM((s.quantity * s.price * (1 - 0.01 * s.discount))
+             * (IFNULL(pp.repare_percent, 5) / 100)) as salary
+        FROM ".$config['db_prefix']."sales s
+        LEFT JOIN ".$config['db_prefix']."products_percents pp
+        ON s.product_id = pp.product_id " . $where;
+
+    $result = @mysql_query($query);
+    if (!$result)
+      {
+          return 0;
+      }
+
+    $value = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+    return $value['salary'];
 }
 
 

@@ -138,7 +138,11 @@ else
          'categories',
          'add-category',
          'edit-category',
-         'stats-price'
+         'stats-price',
+         'add-magazine',
+         'edit-magazine',
+         'sales-by-magazines',
+         'edit-worker'
      );
 
      $pagename = $_GET['p'];

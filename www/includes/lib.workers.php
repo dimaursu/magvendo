@@ -39,6 +39,30 @@ $work_roles_page_url = array(
     FABRICATE => 'fabricated-list'
 );
 
+function mags_get_worker($id)
+{
+    global $config;
+
+    $sql = "SELECT u.* FROM " . $config['db_prefix'] . "users u
+        WHERE u.id = " . $id . " AND u.id IN (SELECT w.user_id FROM mag_workers w)";
+
+    $result = @mysql_query($sql);
+
+    if (!$result)
+      {
+          return array();
+      }
+
+    $worker = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+    if (empty($worker))
+      {
+          return array();
+      }
+
+    return $worker;
+}
+
 /**
  * Get workers function.
  *
@@ -129,7 +153,7 @@ function get_worker_magazines($id)
       }
 
     return $magazines;
-} 
+}
 
 /**
  * Has worker role function.

@@ -394,6 +394,21 @@ $language = array(
 'The product has been added to sold list.' =>
 'Продукт был добавлен в список продаж.',
 
+'Add magazine' =>
+'Добавить магазин',
+
+'The magazine has been added successfully' =>
+'TRANSLATE',
+
+'Edit magazine' =>
+'TRANSLATE',
+
+'The magazine doesn\'t exit.' =>
+'TRANSLATE',
+
+'The magazine has been updated succesfully.' =>
+'TRANSLATE',
+
 /**
  * --- Workers list page ---
  */

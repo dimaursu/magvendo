@@ -74,7 +74,7 @@ function get_magazines($page = '', $args = array(), $items_per_page = 10)
 
     // Define request query.
     $query = "SELECT * FROM `".$config['db_prefix']."magazines` 
-             ORDER BY `name` ASC".$limit;
+             ORDER BY `name` ASC" . $limit;
 
     // Select data.
     $result = @mysql_query($query); 
@@ -84,7 +84,7 @@ function get_magazines($page = '', $args = array(), $items_per_page = 10)
      {
          // Return an empty array;
          return array();
-     }  
+     }
 
     $vendors = array();
 
@@ -97,6 +97,66 @@ function get_magazines($page = '', $args = array(), $items_per_page = 10)
     return $magazines;
 }
 
+function mags_save_magazine()
+{
+    global $config;
+
+    if (empty($_POST['name']))
+      {
+          return _tr("Name field is empty.");
+      }
+
+    $fields[] = "name = '" . $_POST['name'] . "'";
+
+    if (!empty($_POST['description']))
+      {
+          $fields[] = "description = '".$_POST['description']."'";
+      }
+
+    if (!isset($_GET['id']) || !is_numeric($_GET['id']))
+      {
+          $query = "INSERT INTO ".$config['db_prefix']."magazines
+              SET " . implode(', ', $fields);
+      }
+    else
+     {
+         $query = "UPDATE " . $config['db_prefix'] . "magazines
+             SET " . implode(', ', $fields)." WHERE id = '".$_GET['id']."'";
+     }
+
+    $result = @mysql_query($query);
+
+    if (!$result)
+      {
+          return _tr("An error occured. The magainze is not saved.");
+      }
+
+    return '';
+}
+
+function magazines_number($args = array())
+{
+    global $config;
+
+
+    // Define request query with category.
+    $query = "SELECT COUNT(*) as `number` 
+        FROM `".$config['db_prefix']."magazines`";
+
+    // Select products.
+    $result = @mysql_query($query); 
+
+   // Verify selection result.
+   if (!$result)
+     {
+         // Return an empty array;
+         return 0;
+     }
+
+    $number = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+    return $number['number'];
+}
 
 function remove_magazine($id)
 {

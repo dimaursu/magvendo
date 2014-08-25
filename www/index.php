@@ -142,7 +142,8 @@ else
          'add-magazine',
          'edit-magazine',
          'sales-by-magazines',
-         'edit-worker'
+         'edit-worker',
+         'add-worker'
      );
 
      $pagename = $_GET['p'];

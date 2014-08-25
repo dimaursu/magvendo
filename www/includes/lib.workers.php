@@ -680,3 +680,100 @@ function get_sum_by_date($date, $magazine_id)
 
     return $sum;
 }
+
+function mags_update_worker_roles()
+{
+    if (empty($_POST['magazine']) || !is_numeric($_POST['magazine']))
+      {
+          return _tr('Magazine id is not correct.');
+      }
+
+    if (!isset($_GET['id']) || !is_numeric($_GET['id']))
+      {
+          return _tr('Worker id is not correct');
+      }
+
+    $error = 0; print_r($_POST);
+
+    if (!empty($_POST['sell']))
+      {
+          $error = mags_add_role($_GET['id'], $_POST['magazine'], SALE);
+      }
+    else
+      {
+          $error = mags_remove_role($_GET['id'], $_POST['magazine'], SALE);
+      }
+
+    if (!empty($_POST['repare']))
+      {
+          $error = mags_add_role($_GET['id'], $_POST['magazine'], REPARE);
+      }
+    else
+      {
+          $error = mags_remove_role($_GET['id'], $_POST['magazine'], REPARE);
+      }
+
+    if (!empty($_POST['fabricate']))
+      {
+          $error = mags_add_role($_GET['id'], $_POST['magazine'], FABRICATE);
+      }
+    else
+      {
+          $error = mags_remove_role($_GET['id'], $_POST['magazine'], FABRICATE);
+      }
+
+    if ($error)
+      {
+          return _tr("Can't update worker roles");
+      }
+
+    return "";
+}
+
+
+function mags_add_role($worker, $magazine, $role)
+{
+    global $config;
+
+    if (has_worker_role($role, $worker, $magazine))
+      {
+          return 0;
+      }
+
+    $sql = "INSERT INTO ".$config['db_prefix']."workers
+            (user_id, magazine_id, work_role)
+            values(" . $worker . ", " . $magazine  . ", " . $role  . ")";
+
+    $result = @mysql_query($sql);
+
+    if (!$result)
+      {
+          return 1;
+      }
+
+    return 0;
+}
+
+function mags_remove_role($worker, $magazine, $role)
+{
+    global $config;
+
+    if (!has_worker_role($role, $worker, $magazine))
+      {
+          return 0;
+      }
+
+    $sql = "DELETE FROM " . $config['db_prefix'] . "workers
+        WHERE user_id = " . $worker . "
+        AND magazine_id = " . $magazine . "
+        AND work_role = " . $role;
+
+    $result = @mysql_query($sql);
+
+    if (!$result)
+      {
+          return 1;
+      }
+
+    return 0;
+}

@@ -201,7 +201,6 @@ function save_user()
       {
           return _tr("The retyped password is not correct.");
       }
-    
 
     // Create data array.
     $fields[] = "`username` = '".$_POST['username']."'";
@@ -231,9 +230,13 @@ function save_user()
           $fields[] = "`description` = '".$_POST['description']."'";
       }
 
+    $archive = empty($_POST['archive']) ? 0 : 1;
+    $fields[] = "`status` = '". $archive ."'";
+
+    /*
 
     $fields[] = "`role` = '".$_POST['role']."'";
-    $fields[] = "`registered_date` = '".date('Y-m-d H:i:s')."'";
+    $fields[] = "`registered_date` = '".date('Y-m-d H:i:s')."'";*/
 
     // Verify user id variable.
     if (!isset($_GET['id']) || !is_numeric($_GET['id']))

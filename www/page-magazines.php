@@ -40,7 +40,10 @@ else
                <td> 
                  <ul>
                    <?php foreach($workers as $worker) : ?>
-                       <li><a href="index.php?p=edit-worker"><?php echo $worker['name']; ?></a></li>
+                       <?php if ($worker['status']) : ?>
+                       <?php continue; ?>
+                       <?php endif; ?>
+                       <li><a href="index.php?p=edit-worker&id=<?php echo $worker['id']?>"><?php echo $worker['name']; ?></a></li>
                    <?php endforeach; ?>
                  </ul>
                </td>

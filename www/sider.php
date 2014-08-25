@@ -51,6 +51,7 @@
       <li><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a></li> 
       <li><a href="index.php?p=categories"><?php _e('Categories'); ?></a></li> 
       <li><a href="index.php?p=add-magazine"><?php _e('Add magazine'); ?></a></li> 
+      <li><a href="index.php?p=add-worker"><?php _e('Add worker'); ?></a></li>
       <li><a href="index.php?p=magazines"><?php _e('Magazines'); ?></a></li>
     </ul>
 

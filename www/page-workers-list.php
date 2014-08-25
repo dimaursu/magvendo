@@ -50,12 +50,15 @@ if (isset($_POST['show']))
          <th><? _e('Worked days'); ?></th>
        </tr>
        <?php if (!empty($workers)) : ?>
-           <?php foreach($workers as $key => $worker) : ?>      
+           <?php foreach($workers as $key => $worker) : ?>
+           <?php if ($worker['status']) : ?>
+               <?php continue; ?>
+           <?php endif; ?>
            <?php $worker_roles = get_worker_roles($worker['id'], $_SESSION['magsales']['magazine_id']); ?>
          <?php if (!empty($worker_roles)) : ?>      
            <?php  $worker['worked_days'] = worked_days($worker['id'], $_SESSION['magsales']['magazine_id'], $date_from, $date_to); ?>
             <tr <?php if ($key % 2 == 0) : ?>class="even"<?php endif; ?>>
-               <td><b><?php echo $worker['name']; ?></b></td> 
+               <td><b><a href="index.php?p=edit-worker&id=<?php echo $worker['id']; ?>"><?php echo $worker['name']; ?></a></b></td> 
                <td>
                  <?php $worker_salary = get_worker_salary($date_from, $date_to, $_SESSION['magsales']['magazine_id'], $worker['id']); ?> 
                  <table class="worker-roles">

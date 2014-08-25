@@ -124,6 +124,9 @@ $language = array(
 'Sales percent (repare)' =>
 'Ремонт, %',
 
+'Repare' =>
+'Ремонт',
+
 /**
  * Login page.
  */
@@ -451,6 +454,9 @@ $language = array(
 
 'Worker' =>
 'Работник',
+
+'Add worker' =>
+'Добавить работника',
 
 'Magazines' =>
 'Магазины',

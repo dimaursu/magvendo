@@ -127,6 +127,12 @@ $language = array(
 'Repare' =>
 'Ремонт',
 
+'Workers archive' =>
+'Архив работников',
+
+'Salaries' =>
+'Зарлата',
+
 /**
  * Login page.
  */

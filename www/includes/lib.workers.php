@@ -44,7 +44,7 @@ function mags_get_worker($id)
     global $config;
 
     $sql = "SELECT u.* FROM " . $config['db_prefix'] . "users u
-        WHERE u.id = " . $id . " AND u.id IN (SELECT w.user_id FROM mag_workers w)";
+        WHERE u.id = " . $id;
 
     $result = @mysql_query($sql);
 

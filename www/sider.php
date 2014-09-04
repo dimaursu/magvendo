@@ -47,12 +47,14 @@
     <ul>
       <li><a href="index.php?p=sales-by-worker"><?php _e('Sales'); ?></a></li>
       <li><a href="index.php?p=sales-by-magazines"><?php _e('Sales by magazines'); ?></a></li> 
-      <li><a href="index.php?p=workers-list"><?php _e('Workers list'); ?></a></li>
+      <li><a href="index.php?p=salaries"><?php _e('Salaries'); ?></a></li>
+      <li><a href="index.php?p=workers"><?php _e('Workers'); ?></a></li>
+      <li><a href="index.php?p=workers-archive"><?php _e('Workers archive'); ?></a></li>
       <li><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a></li> 
       <li><a href="index.php?p=categories"><?php _e('Categories'); ?></a></li> 
       <li><a href="index.php?p=add-magazine"><?php _e('Add magazine'); ?></a></li> 
-      <li><a href="index.php?p=add-worker"><?php _e('Add worker'); ?></a></li>
       <li><a href="index.php?p=magazines"><?php _e('Magazines'); ?></a></li>
+      <li><a href="index.php?p=add-worker"><?php _e('Add worker'); ?></a></li>
     </ul>
 
 <?php endif; ?>

@@ -1,5 +1,5 @@
 <?php if(user_role() == ADMIN_ROLE) : ?>
-    <?php require_once 'page-workers-list.php'; ?>
+    <?php require_once 'page-salaries.php'; ?>
 <?php else: ?>
     <?php if ( has_worker_role(SALE)) : ?>
         <?php require_once 'page-sales.php'; ?>

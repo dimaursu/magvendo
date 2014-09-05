@@ -415,6 +415,9 @@ $language = array(
 'The magazine has been updated succesfully.' =>
 'Магазин был успешно изменен',
 
+'The worker has been updated succesfully.' =>
+"Работник был успешно изменен",
+
 /**
  * --- Workers list page ---
  */

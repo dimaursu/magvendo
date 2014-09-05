@@ -693,7 +693,7 @@ function mags_update_worker_roles()
           return _tr('Worker id is not correct');
       }
 
-    $error = 0; print_r($_POST);
+    $error = 0; 
 
     if (!empty($_POST['sell']))
       {

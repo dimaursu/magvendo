@@ -93,7 +93,7 @@ function login()
     $user = @mysql_fetch_array($result, MYSQL_ASSOC);
 
     // Verfy password.
-    if (md5($_POST['password']) != $user['password'])
+    if (md5($_POST['password']) != $user['password'] || $user['status'] != 0)
       {
           return _tr('User or password is not correct.');    
       }
@@ -125,13 +125,13 @@ function login()
 <html dir="ltr" lang="en-US">
 <head>
     <meta charset="UTF-8" />
-    <title>LightStore - Login</title>
+    <title>MagSales - Login</title>
     <link rel='stylesheet' href='css/login-page.css' type='text/css' media='all' />
 </head>
 
 <body>
 
-<h1 id="header"><a href="index.php">Light Store</a></h1>
+<h1 id="header"><a href="index.php">MagSales</a></h1>
 
 <form id="login-form" enctype="multipart/form-data" action="login.php" method="post">
 <?php if (!empty($login_error)) :?>
@@ -150,8 +150,6 @@ function login()
 <p><label><?php _e('Password'); ?></label> <br /> <input type="password" name="password" /></p>
 <p><input class="login-submit" type="submit" name="login" value="<?php _e('Login'); ?>" /></p>
 </form>
-
-<p id="footer"><b><a href="http://sv-ti.com/light-store">Light Store</a></b> - <?php _e('a <a href="https://www.gnu.org/philosophy/free-sw.html">free software</a> web application for store management.'); ?></p>
 
 </body>
 </html>

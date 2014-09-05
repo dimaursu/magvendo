@@ -140,6 +140,33 @@ function categories_number($args = array())
     return $number['number'];
 }
 
+function mags_category_exist($name)
+{
+    global $config;
+
+    $sql = "SELECT COUNT(*) as number FROM " . $config['db_prefix'] . "categories
+        WHERE LOWER(name) = '" . strtolower(trim($name)) ."'";
+
+    // Select products.
+    $result = @mysql_query($sql);
+
+   // Verify selection result.
+   if (!$result)
+     {
+         // Return an empty array;
+         return FALSE;
+     }
+
+    $number = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+    if ($number['number'] > 0)
+      {
+          return TRUE;
+      }
+
+    return FALSE;
+}
+
 /**
  * Add category function.
  *
@@ -156,6 +183,11 @@ function save_category()
     if (empty($_POST['name']))
       {
           return _tr("Name field is empty.");
+      }
+
+    if (mags_category_exist($_POST['name']))
+      {
+          return _tr("A category with this name already exist.");
       }
 
     // Create data array.

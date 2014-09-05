@@ -133,6 +133,12 @@ $language = array(
 'Salaries' =>
 'Зарлата',
 
+'A category with this name already exist.' =>
+'Категория с таким именем уже существует',
+
+'The category has been added successfuly.' =>
+'Категория была добавлена успешно',
+
 /**
  * Login page.
  */

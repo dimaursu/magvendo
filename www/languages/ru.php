@@ -407,16 +407,13 @@ $language = array(
 'Добавить магазин',
 
 'The magazine has been added successfully' =>
-'TRANSLATE',
-
-'Edit magazine' =>
-'TRANSLATE',
+'Магазин был успешно добавлен',
 
 'The magazine doesn\'t exit.' =>
-'TRANSLATE',
+'Магазин не существует',
 
 'The magazine has been updated succesfully.' =>
-'TRANSLATE',
+'Магазин был успешно изменен',
 
 /**
  * --- Workers list page ---

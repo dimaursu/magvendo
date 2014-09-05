@@ -1,7 +1,7 @@
 <?php if (user_role() != 1) : ?>
     <p><?php _e('You cannot access this page.'); ?></p>
 <?php else : ?>
-    <h2><?php _e('Edit magazine'); ?></h2>
+    <h2><?php _e('Edit'); ?></h2>
 
     <?php if (!isset($_GET['id']) || !is_numeric($_GET['id'])) : ?>
         <p><?php _e('The magazine doesn\'t exit.'); ?></p>

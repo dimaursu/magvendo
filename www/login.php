@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(-1);
-ini_set('display_errors', '1');
-
 // Require configuration file.
 require_once 'configure.php';
 
@@ -13,6 +10,7 @@ session_start();
 if (isset($_SESSION['login']))
   {
       header('Location: index.php');
+      exit;
   }
 
 require_once 'languages/'.LSLANG.'.php';
@@ -110,6 +108,7 @@ function login()
            {
                @mysqli_close($db_link);
                header('Location: index.php');
+               exit;
            }
         else
           {

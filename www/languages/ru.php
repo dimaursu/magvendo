@@ -139,6 +139,9 @@ $language = array(
 'The category has been added successfuly.' =>
 'Категория была добавлена успешно',
 
+'Wroker roles' =>
+'Ролиx',
+
 /**
  * Login page.
  */

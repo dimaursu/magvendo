@@ -20,9 +20,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-error_reporting(-1);
-ini_set('display_errors', '1');
-
 // Require configuration file.
 require_once 'configure.php';
 
@@ -33,6 +30,7 @@ session_start();
 if (!isset($_SESSION['magsales']['login']))
   {
       header('Location: login.php');
+      exit;
   }
 
 require_once 'languages/'.LSLANG.'.php';
@@ -98,9 +96,11 @@ if (isset($_GET['a']) && $_GET['a'] == 'logout')
   {
       // Remove session data.
       unset($_SESSION['magsales']);
+      @mysqli_close($db_link);
 
       // Redirect to login page.
       header('Location: login.php');
+      exit;
   }
 
 // Verify settings.

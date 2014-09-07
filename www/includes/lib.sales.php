@@ -210,8 +210,9 @@ function save_sale()
       {
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
-    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";    
-    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";    
+
+    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";
+    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";
 
     if (!isset($_GET['id']) || !is_numeric($_GET['id']))
       {

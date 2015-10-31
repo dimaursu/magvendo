@@ -63,15 +63,6 @@
     </tr>
     <tr>
         <td class="first">
-            <?php _e('Percent from sale'); ?>:
-        </td>
-        <td>
-            <input type="text" name="salary_percent" 
-            value="<?php if(!empty($error) && !empty($_POST['salary_percent']) ) : ?><?php echo $_POST['salary_percent']; ?><?php endif; ?>" />
-        </td>
-    </tr>
-    <tr>
-        <td class="first">
             <?php _e('Date'); ?>:
         </td>
         <td>

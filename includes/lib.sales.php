@@ -157,6 +157,11 @@ function save_sale()
 {
     global $config;
 
+    $update = FALSE;
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $update = TRUE;
+    }
+
     // Verify name variable.
     if (empty($_POST['product']))
       {
@@ -194,10 +199,33 @@ function save_sale()
       {
           $fields[] = "`quantity` = '".$_POST['quantity']."'";
       }
-    if (!empty($_POST['discount']) && is_numeric($_POST['quantity']))
-      {
-          $fields[] = "`discount` = '".$_POST['discount']."'";
-      }
+
+    $card_discount = FALSE;
+    if (!empty($_POST['card']) && !$update) {
+        if (!is_numeric($_POST['card'])) {
+	    return _tr("The card number must be numberic");
+        }
+
+        $card_exists = mag_card_exists($_POST['card']);
+
+        if ($card_exists === FALSE) {
+	    return _tr("Error on verifying the card number");
+        }
+
+        if ($card_exists === 0) {
+	    return _tr("The card number dosen't exist");
+        }
+
+        $fields[] = "`card_number` = '" . $_POST['card'] . "'";
+        $card_discount = TRUE; 
+    }
+
+    if ($card_discount) {
+        $fields[] = "`discount` = '" . mag_card_discount($_POST['card']) . "'";
+    } else if (!empty($_POST['discount']) && is_numeric($_POST['discount'])) {
+        $fields[] = "`discount` = '" . $_POST['discount'] . "'";
+    }
+
     if (!empty($_POST['salary_percent']))
       {
           $fields[] = "`salary_percent` = '".$_POST['salary_percent']."'";
@@ -214,7 +242,7 @@ function save_sale()
     $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";
     $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";
 
-    if (!isset($_GET['id']) || !is_numeric($_GET['id']))
+    if (!$update)
       {
           // Prepare query for adding new sale to database. 
           $query = "INSERT INTO `".$config['db_prefix']."sales` 
@@ -224,7 +252,7 @@ function save_sale()
      {
          // Prepare query for update a sale data.
          $query = "UPDATE `".$config['db_prefix']."sales` 
-             SET ". implode(', ',$fields)." WHERE `id` = '".$_GET['id']."'";
+             SET ". implode(', ',$fields)." WHERE `id` = '". $_GET['id'] . "'";
      }
 
     // Insert into the database. 

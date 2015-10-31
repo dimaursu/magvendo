@@ -104,7 +104,7 @@ function get_categories($page = '', $args = array(), $items_per_page = 10)
          return array();
      }  
 
-    $vendors = array();
+    $categories = array();
 
     // Fetch the result.
     while ($category = @mysql_fetch_array($result, MYSQL_ASSOC))

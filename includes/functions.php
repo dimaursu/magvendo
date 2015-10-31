@@ -127,5 +127,3 @@ function real_escape($string)
           return mysql_real_escape_string($string);
       }
 }
-
-

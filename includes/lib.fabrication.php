@@ -20,15 +20,68 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+function mag_get_fabricated($args = array())
+{
+    global $config;
+
+    $conditions = array();
+
+    if (isset($args['date_from'])) {
+        $conditions[] = "CAST(`f.date` AS DATE) >= '". $args['date_from'] . "'";
+    }
+    if (isset($args['date_to'])) {
+        $conditions[] = "CAST(`f.date` AS DATE) <= '". $args['date_to'] . "'";
+    }
+    if (isset($args['user'])) {
+        $conditions[] = "CAST(`f.date` AS DATE) <= '". $args['user'] . "'";
+    }
+    if (isset($args['magazine'])) {
+        $conditions[] = "CAST(`f.date` AS DATE) <= '". $args['magazine'] . "'";
+    }
+
+    if (empty($conditions)) {
+        $conditions = '';
+    }
+    else {
+        $conditions = implode(" AND ", $conditions);
+    }  
+
+    $query = "SELECT f.id as product_id, f.name as product_name, f.quantity, f.salary,
+        m.id as magazine_id, m.name as magazine_name, u.id as user_id,
+        u.name as worke_name, CAST(f.date AS DATE) as date 
+        FROM " . $config['db_prefix'] . "fabricated f
+        LEFT JOIN " . $config['db_prefix'] . "magazines m
+        ON f.magazine_id = m.id
+        LEFT JOIN " . $config['db_prefix'] . "users u
+        ON f.user_id = u.id "
+        . " WHERE " . $conditions 
+        ." ORDER BY date DESC"; 
+    echo $query;
+    $result = @mysql_query($query); 
+
+    if (!$result) {
+        return array();
+    }  
+
+    $products = array();
+
+    while ($product = @mysql_fetch_array($result, MYSQL_ASSOC)) {
+        $products[] = $product;
+    }
+
+    return $products;
+}
+
+// Depricated function
 function get_fabricated($date_from, $date_to, $user_id = '', $magazine_id = '')
 {
     global $config;
 
-    $query = "SELECT `id`, `name`, `quantity`, `salary`, 
+    $query = "SELECT `id`, `name`, `price`, `quantity`, `salary`, 
         CAST(`date` AS DATE) as `date` FROM `".$config['db_prefix']."fabricated`  
         WHERE CAST(`date` AS DATE) >= '".$date_from."'
-        AND `user_id` = '".$user_id."' AND `magazine_id` = '".$magazine_id."' 
-        AND CAST(`date` AS DATE) <= '".$date_to."' ORDER BY `date` DESC"; 
+        AND `user_id` = '" . $user_id . "' AND `magazine_id` = '" . $magazine_id."' 
+        AND CAST(`date` AS DATE) <= '" . $date_to . "' ORDER BY `date` DESC"; 
 
     // Select the data.
     $result = @mysql_query($query); 
@@ -69,6 +122,14 @@ function save_fabricated()
           return _tr("Name field is empty.");
       }
 
+    if (empty($_POST['price'])) {
+        return _tr("Price field is empty.");
+    }
+
+    if (!is_numeric($_POST['price'])) {
+        return _tr("Price must be numberic");
+    }
+
     // Verify salary variable.
     if (empty($_POST['quantity']) && $_POST['quantity'] != 0)
       {
@@ -95,6 +156,7 @@ function save_fabricated()
 
     // Create data fields.
     $fields[] = "`name` = '".$_POST['name']."'";
+    $fields[] = "`price` = '" . $_POST['price'] . "'";
     $fields[] = "`quantity` = '".$_POST['quantity']."'";
     $fields[] = "`salary` = '".$_POST['salary']."'";
     if (!empty($_POST['date']))

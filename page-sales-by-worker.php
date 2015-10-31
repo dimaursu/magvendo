@@ -86,27 +86,31 @@ else
                <th><?php _e('Date'); ?></th>
                <th><?php _e('Sales'); ?></th>
                <th><?php _e('Reparation'); ?></th>
+               <th><?php _e('Encrustation'); ?></th>
                <th><?php _e('Total'); ?></th>
                <th><?php _e('Sale worker'); ?></th>
              </tr> 
              <?php 
                 $total_sales = 0;
                 $total_repared = 0;
+                $total_encrustated = 0;
                 $total = 0; 
              ?>
              <?php for ($date = $date_to; strtotime($date) >= strtotime($date_from); $date = date('Y-m-d', strtotime(' -1 day', strtotime($date)))) : ?>
                  <?php $sum_by_date = get_sum_by_date($date, $_SESSION['magsales']['magazine_id']); ?>
-               <?php if($sum_by_date['sales_sum']+$sum_by_date['repared_sum'] != 0) : ?>  
-                 <?php $worker = get_user($sum_by_date['user_id']); ?>
+               <?php if ($sum_by_date['sales_sum'] + $sum_by_date['repared_sum'] + $sum_by_date['encrustated_sum'] != 0) : ?>  
                  <tr>
                    <td><?php echo $date; ?></td>
                    <td><?php echo ceil($sum_by_date['sales_sum']); ?></td>
                    <td><?php echo ceil($sum_by_date['repared_sum']); ?></td>
-                   <td><?php echo ceil($sum_by_date['repared_sum']) + ceil($sum_by_date['sales_sum']); ?></td>
+                   <td><?php echo ceil($sum_by_date['encrustated_sum']); ?></td>
+                   <td><?php echo ceil($sum_by_date['repared_sum']) + ceil($sum_by_date['sales_sum']) + ceil($sum_by_date['encrustated_sum']); ?></td>
                    <?php  $total_sales += ceil($sum_by_date['sales_sum']); ?>
                    <?php  $total_repared +=  ceil($sum_by_date['repared_sum']); ?>
-                   <?php  $total += ceil($sum_by_date['sales_sum']) + ceil($sum_by_date['repared_sum']); ?>
-                   <td><?php echo $worker['name']; ?></td>
+                   <?php  $total_encrustated +=  ceil($sum_by_date['encrustated_sum']); ?>
+                   <?php  $total += ceil($sum_by_date['sales_sum']) + ceil($sum_by_date['repared_sum']) + ceil($sum_by_date['encrustated_sum']); ?>
+                   <?php $worker = get_user($sum_by_date['user_id']); ?>
+                   <td><?php if (!empty($worker)) : ?><?php echo $worker['name']; ?><?php endif; ?></td>
                <?php endif; ?>
              <?php endfor; ?>
                  </tr>
@@ -114,6 +118,7 @@ else
                   <td><b><?php _e('Total'); ?>: </b></td>
                   <td><b><?php echo $total_sales; ?></b></td>
                   <td><b><?php echo $total_repared; ?></b></td>
+                  <td><b><?php echo $total_encrustated; ?></b></td>
                   <td><b><?php echo $total; ?></b></td>
                  </tr>
          </table>

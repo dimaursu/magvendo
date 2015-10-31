@@ -54,6 +54,15 @@
     </tr>
     <tr>
         <td class="first">
+            <?php _e('Card number'); ?>:
+        </td>
+        <td>
+            <input type="number" name="card" 
+            value="<?php if(!empty($error) && !empty($_POST['card']) ) : ?><?php echo $_POST['card']; ?><?php endif; ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td class="first">
             <?php _e('Percent from sale'); ?>:
         </td>
         <td>

@@ -678,6 +678,21 @@ function get_sum_by_date($date, $magazine_id)
 
     $sum['repared_sum'] = $repared['sum'];
 
+    // Encrustation.
+    $query = "SELECT SUM(`price`) as `sum`
+        FROM `" . $config['db_prefix'] . "fabricated`  
+        WHERE CAST(`date` AS DATE) = '" . $date . "'
+        AND `magazine_id` = '" . $magazine_id . "'";
+
+    $result = @mysql_query($query); 
+
+    if (!$result) {
+        return 0;
+    }  
+
+    $encrustated = @mysql_fetch_array($result, MYSQL_ASSOC);
+    $sum['encrustated_sum'] = $encrustated['sum'];
+
     return $sum;
 }
 

@@ -23,6 +23,15 @@
     </tr>
     <tr>
         <td class="first">
+            <?php _e('Price'); ?><sup>*</sup>:
+        </td>
+        <td>
+            <input type="text" name="price" 
+            value="<?php if(!empty($error) && !empty($_POST['price']) ) : ?><?php echo $_POST['price']; ?><?php endif; ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td class="first">
             <?php _e('Quantity'); ?><sup>*</sup>:
         </td>
         <td>

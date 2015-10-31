@@ -26,7 +26,7 @@ else
 
 <div id="vendors-list">
     <?php $categories = get_categories($page); ?> 
-    <h3><a href="index.php?p=add-category"><? _e('Add a new category'); ?></a></h3>
+    <h3><a href="index.php?p=add-category"><?php _e('Add a new category'); ?></a></h3>
     <table class="ls-table">
        <tr><th><?php _e('Name'); ?></th>
        <th><?php _e('Percents'); ?></th>

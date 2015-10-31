@@ -21,36 +21,65 @@
  */
 
 
-function get_settings($name)
+function mag_get_settings($name)
 {
     global $config;
 
-    // Define SQl request query.
-    $query = "SELECT * FROM `".$config['db_prefix']."settings` 
-    WHERE `name` = '".$name."'";
+    $query = "SELECT * FROM `" . $config['db_prefix'] . "settings` 
+    WHERE `name` = '" . $name . "'";
            
-    // Select contact.
     $result = @mysql_query($query); 
 
-    // Verify the selection result.
-    if (!$result)
-     {
-         return '';
-     }  
+    if (!$result) {
+        return NULL;
+    }  
 
-    // Fetch the result.
     $settings = @mysql_fetch_array($result, MYSQL_ASSOC);
+
+    if (!isset($settings['value'])) {
+        return NULL;
+    }
 
     return $settings['value'];
 }
 
-function save_settings($name, $value)
+function mag_save_settings($name, $value)
 {
     global $config;
 
-    // Prepare query for user update.
-    $query = "UPDATE `".$config['db_prefix']."settings` 
-        SET `value` = '".$value."' WHERE `name` = '".$name."'";
+    if (mag_settings_exists($name)) {
+        $query = "UPDATE `" . $config['db_prefix'] . "settings` 
+            SET `value` = '" . $value . "' WHERE `name` = '" . $name . "'";
+    } else {
+        $query = "INSERT INTO `" . $config['db_prefix'] . "settings` 
+            (`name`, `value`) VALUES ('" . $name . "', '" . $value . "')";
+    }
 
     @mysql_query($query);
+}
+
+
+function mag_settings_exists($name) {
+    global $config;
+
+    $sql = "SELECT `id` FROM `" . $config['db_prefix'] . "settings`
+        WHERE `name` = '" . $name . "' LIMIT 1";
+
+    $result = @mysql_query($sql);
+
+    if (!$result) {
+        return FALSE;
+    }
+
+    $number = mysql_num_rows($result);
+
+    if ($number === FALSE) {
+        return FALSE;
+    }
+
+    if ($number > 0) {
+        return TRUE;
+    }
+
+    return FALSE;
 }

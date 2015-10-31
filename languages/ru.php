@@ -131,7 +131,7 @@ $language = array(
 'Архив работников',
 
 'Salaries' =>
-'Зарлата',
+'Зарплата',
 
 'A category with this name already exist.' =>
 'Категория с таким именем уже существует',
@@ -169,6 +169,9 @@ $language = array(
 
 'Sum, lei' =>
 'Сумма, Лей',
+
+'Sum' =>
+'Сумма',
 
 /**
  * ----- Categories ---
@@ -310,8 +313,41 @@ $language = array(
 'Продажи по суммам',
 
 /**
+ * Clients and cards
+ */
+'Card, name, phone' =>
+'Карточка, имя, телефон',
+
+'Card' =>
+'Карточка',
+
+'card' =>
+'карточка',
+
+'Customer' =>
+'Клиент',
+
+'Last year' =>
+'Последний год',
+
+'Six months' =>
+'Полгода',
+
+'Statistics by cards' =>
+'Статистика по карточкам',
+
+'Birthday' =>
+'День рождения',
+
+/**
  * Side bar.
  */
+
+'Customers' =>
+'Клиенты',
+
+'Add customer' =>
+'Добавить клиента',
 
 'Statistics' =>
 'Статистика',
@@ -338,7 +374,7 @@ $language = array(
 'Список товаров',
 
 'Add a new category' =>
-'Добавить новую категорию',
+'Добавить категорию',
 
 'Category name' =>
 'Название категории',
@@ -515,7 +551,68 @@ $language = array(
 'Показать главное меню',
 
 'Page doesn\'t exist.' 
-=> 'Страница не существует.'
+=> 'Страница не существует.',
+
+/**
+ * =======================
+ */
+'Not enought rights to perform this operation' =>
+'',
+
+'The card is not set' =>
+'Не ввели номер карточки',
+
+'The card number must be numeric' =>
+'Номер карточки должн быть числом',
+
+'Error on validating the card number.' =>
+'Ошибка при проверке номера карточки',
+
+'The card with this number already exists.' =>
+'Карточка с таким номером уже существует',
+
+'An error occured. The customer was not saved.' =>
+'Произошла ошибка. Клиент не был сохранен',
+
+'The customer has been added successfully.' =>
+'Клиент был успешно добавлен',
+
+'dd-mm-yyyy, for example, 09-05-1984' =>
+'дд-мм-гггг, например 09-05-1984',
+
+'Edit customer' =>
+'Редактировать клиента',
+
+'Encrustation' =>
+'Инкрустация',
+
+'Price field is empty' =>
+'Не ввели цену',
+
+'Card number' =>
+'Номер карточки',
+
+'Price must be numberic' =>
+'Цена должно быть числом',
+
+'Set cards discount' =>
+'Скидка',
+
+'Cards discount' =>
+'Скидка',
+
+'The cards discount has been save succesfully' =>
+'Скидка было успешно сохранена',
+
+'Discount must not be empty' =>
+'Не ввели скидку',
+
+'Discount must be numeric' =>
+'Скидка должна быть числом',
+
+'Discount must have values 0 - 100' =>
+'Скидка должна быть числом 0 - 100'
+
 );
 
 

@@ -99,6 +99,7 @@ else
         <table class="ls-table">
              <tr>
                <th><?php _e('Product name'); ?></th>
+               <th><?php _e('Price'); ?></th>
                <th><?php _e('Quantity, Lei'); ?></th>
                <th><?php _e('Salary per object, Lei'); ?></th>
                <th><?php _e('Salary, Lei'); ?></th>
@@ -124,6 +125,7 @@ else
                  <?php endif; ?>
                  <tr>
                    <td><?php echo $product['name']; ?></td>
+                   <td><?php echo $product['price']; ?></td>
                    <td><?php echo $product['quantity']; ?></td>
                    <td><?php echo $product['salary']; ?></td>
 		<?php $salary = round($product['salary']*$product['quantity'], 2, PHP_ROUND_HALF_DOWN); ?>
@@ -142,8 +144,8 @@ else
                          <td></td><td><td></td></td><td class="total_by_date"><?php echo $salary_by_date; $salary_by_date = 0; ?></td>
                      </tr>
                  <?php endif; ?>
-                <tr class="total"><td><td><td><b><?php _e('Total'); ?>: </b></td></td><td><b><?php echo $salary_total; ?></b></td></tr>
-                <tr class="total"><td><td><td><b><?php _e('Days'); ?>: </b></td></td><td><b><?php echo $days; ?></b></td></tr>
+                <tr class="total"><td></td><td><td><td><b><?php _e('Total'); ?>: </b></td></td><td><b><?php echo $salary_total; ?></b></td></tr>
+                <tr class="total"><td></td><td><td><td><b><?php _e('Days'); ?>: </b></td></td><td><b><?php echo $days; ?></b></td></tr>
          </table>
 
         <p><input class="print-button" type="button" href="#" onclick="window.print(); return false" value="<?php _e('Print');?>"></p>

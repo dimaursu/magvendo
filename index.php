@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
  * File name: index.php
@@ -20,7 +20,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-define('MAGSALES', TRUE);
+define("MAGVENDO", TRUE);
+define("MAGSALES", TRUE); // For compatibility.
+define("MAGV_VERSION_MAJOR", 0);
+define("MAGV_VERSION_MINOR", 9);
+define("MAGV_VERSION_PATCH", 0);
+define("MAGV_APP_NAME", "MagVendo");
 
 require_once 'configure.php';
 

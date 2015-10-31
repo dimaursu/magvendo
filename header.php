@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
 <head>
     <meta charset="UTF-8" />
-    <title>MagSales</title>
+    <title><?php echo MAGV_APP_NAME; ?></title>
     <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
     <link rel='stylesheet' href='css/print.css' type='text/css' media='print' />
     <link rel="stylesheet" href="js/jquery-ui.css" />
@@ -71,7 +71,7 @@ var old_goToToday = $.datepicker._gotoToday
     <?php if (isset($_SESSION['magsales']['magazine_id'])) : ?>
         <?php $magazine = get_magazine($_SESSION['magsales']['magazine_id']); ?>
     <?php endif; ?>
-    <h1><a href="index.php">MagSales</a><?php if(!empty($magazine)) : ?> <span> | <?php echo $magazine['name']; ?></span><?php endif; ?></h1>
+    <h1><a href="index.php"><?php echo MAGV_APP_NAME; ?></a><?php if(!empty($magazine)) : ?> <span> | <?php echo $magazine['name']; ?></span><?php endif; ?></h1>
 </div> <!-- #header -->
 
 <?php require_once 'sider.php'; ?>

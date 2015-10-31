@@ -142,30 +142,7 @@ function mag_save_customer()
         return _tr("Name field is empty.");
     }
 
-    if (!$update && empty($_POST['card'])) {
-        return _tr("The card is not set");
-    }
-
-    if (!$update && !is_numeric($_POST['card'])) {
-        return _tr("The card number must be numeric");
-    }
-
-    // Verify if there is no existing card with the same number.
-    if (!$update) {
-        $card_exists = mag_card_exists($_POST['card']);
-        if ($card_exists === FALSE) {
-            return _tr("Error on validating the card number.");
-        }
-        if ($card_exists === 1) {
-           return _tr("The card with this number already exists.");
-        }
-    }
-
     $fields[] = "`name` = '" . $_POST['name'] . "'";
-    // Can't change the card number on update.
-    if (!$update) {
-        $fields[] = "`card` = '" . $_POST['card'] . "'";
-    }
     if (!empty($_POST['phone'])) {
         $fields[] = "`phone` = '" . $_POST['phone'] . "'";
     }

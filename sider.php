@@ -12,21 +12,12 @@
 <?php if (user_role() == ADMIN_ROLE) : ?>    
     <h2><?php _e('Admin'); ?></h2>
     <ul id="side-admin-menu">
-      <li><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a></li> 
-      <li><span class="separator"></span></li>
       <li><a href="index.php?p=categories"><?php _e('Products'); ?></a></li>
       <li><span class="separator"></span></li>
-      <li><a href="index.php?p=add-customer"><?php _e('Add customer'); ?></a></li>
       <li><a href="index.php?p=customers"><?php _e('Customers'); ?></a></li>
-      <li><span class="separator"></span></li>
-      <li><a href="index.php?p=sales-by-magazines"><?php _e('Sales'); ?></a></li> 
-      <li><span class="separator"></span></li>
-      <li><a href="index.php?p=add-magazine"><?php _e('Add magazine'); ?></a></li> 
-      <li><a href="index.php?p=magazines"><?php _e('Magazines'); ?></a></li>
-      <li><span class="separator"></span></li>
-      <li><a href="index.php?p=workers"><?php _e('Workers'); ?></a></li>
-      <li><a href="index.php?p=workers-archive"><?php _e('Workers archive'); ?></a></li>
-      <li><a href="index.php?p=add-worker"><?php _e('Add worker'); ?></a></li>
+      <li><a href="index.php?p=add-customer"><?php _e('Add customer'); ?></a></li>
+      <li><span class="separator"></span></li>      
+      <li><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a></li> 
     </ul>
 <?php endif; ?>
 

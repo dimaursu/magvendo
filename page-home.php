@@ -1,3 +1,3 @@
-<?php require_once 'page-sales-all.php'; ?>
+<?php require_once 'page-sales.php'; ?>
 
 

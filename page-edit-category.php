@@ -29,20 +29,6 @@
               value="<?php echo $name; ?>" />
           </td>
       </tr>
-        <tr>
-          <td class="first">
-            <?php _e('Sales percent (repare)'); ?>:
-          </td>
-          <td>
-            <?php if(!empty($error) && !empty($_POST['repare']) ) : ?>
-                <?php $repare = $_POST['repare']; ?>
-            <?php else :?>
-                <?php $repare = $category['repare_percent']; ?>
-            <?php endif; ?>
-            <input type="text" name="repared"
-              value="<?php echo $repare; ?>" />
-          </td>
-      </tr>
       <tr>
           <td class="first">
             <?php _e('Description'); ?>:

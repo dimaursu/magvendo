@@ -39,7 +39,6 @@ else if (!empty($_GET['s'])) {
   <?php $customers = mag_get_customers($page, $conditions, 20); ?> 
     <table class="ls-table">
        <tr>
-         <th><?php _e('Card number'); ?></th>
          <th><?php _e('Name'); ?></th>
          <th><?php _e('Phone'); ?></th>
          <th><?php _e('Birthday'); ?></th>
@@ -49,9 +48,6 @@ else if (!empty($_GET['s'])) {
        <?php if (!empty($customers)) : ?>
            <?php foreach($customers as $key => $customer) : ?>
             <tr <?php if ($key % 2 == 0) : ?>class="even"<?php endif; ?>>
-               <td>
-	       <b><?php echo $customer['card']; ?></b>
-               </td>
                <td>
                    <a href="index.php?p=customer&id=<?php echo $customer['id']; ?>"><?php echo $customer['name'] ?></a>
                </td>

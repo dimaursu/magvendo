@@ -26,14 +26,6 @@
         </tr>
         <tr>
           <td class="first">
-            <?php _e('Card'); ?>:<sup>*</sup>
-          </td>
-          <td>
-            <input type="number" name="card" value="" />
-          </td>
-        </tr>
-        <tr>
-          <td class="first">
             <?php _e('Phone'); ?>:
           </td>
           <td>

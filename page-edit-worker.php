@@ -125,20 +125,4 @@ else
             </tr>
           </table>
         </form>
-
-    <h2><?php _e("Wroker roles"); ?></h2>
-
-            <?php $magazines = get_magazines(); ?>
-            <?php foreach($magazines as $magazine) : ?>
-        <form class="input-form" enctype="multipart/form-data" action="index.php?p=edit-worker&id=<?php echo $_GET['id']; ?>" method="post">
-
-                  <h3><?php echo $magazine['name']; ?><input type="hidden" name="magazine" value="<?php echo $magazine['id']; ?>"></h3>
-                  <ul>
-    <li><input type="checkbox" name="sell" <?php if(has_worker_role(SALE, $worker['id'], $magazine['id'])) : ?>checked="checked"<?php endif; ?> value="<?php echo SALE; ?>"> <?php echo $work_roles[SALE]; ?></li>
-                     <li><input type="checkbox" name="repare" <?php if(has_worker_role(REPARE, $worker['id'], $magazine['id'])) : ?>checked="checked"<?php endif; ?> value="<?php echo REPARE; ?>"> <?php echo $work_roles[REPARE]; ?></li>
-                     <li><input type="checkbox" name="fabricate" <?php if(has_worker_role(FABRICATE, $worker['id'], $magazine['id'])) : ?>checked="checked"<?php endif; ?> value="<?php echo FABRICATE; ?>"> <?php echo $work_roles[FABRICATE]; ?></li>
-                  </ul>
-                  <input class="submit" type="submit" name="update_roles" value="<?php _e('Save'); ?>" />
-            </form>
-            <?php endforeach; ?>
 <?php endif; ?>

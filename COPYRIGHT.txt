@@ -1,5 +1,5 @@
-MagSales - management of magasine salses
-Copyright (C) 2013  Iurie Nistor
+MagVendo - managemend of sales and clients
+Copyright (C) 2013  Iurie Nistor (http://magvendo.com)
 
 LightStore is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by

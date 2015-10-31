@@ -16,17 +16,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `crystalm_2013`
---
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_categories`
+-- Table structure for table `magv_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_categories` (
+CREATE TABLE IF NOT EXISTS `magv_categories` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `description` text NOT NULL,
@@ -36,10 +32,10 @@ CREATE TABLE IF NOT EXISTS `mag_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_fabricated`
+-- Table structure for table `magv_fabricated`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_fabricated` (
+CREATE TABLE IF NOT EXISTS `magv_fabricated` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `quantity` bigint(20) NOT NULL DEFAULT '1',
@@ -53,10 +49,10 @@ CREATE TABLE IF NOT EXISTS `mag_fabricated` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_magazines`
+-- Table structure for table `magv_magazines`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_magazines` (
+CREATE TABLE IF NOT EXISTS `magv_magazines` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `description` text NOT NULL,
@@ -66,10 +62,10 @@ CREATE TABLE IF NOT EXISTS `mag_magazines` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_products`
+-- Table structure for table `magv_products`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_products` (
+CREATE TABLE IF NOT EXISTS `magv_products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `image` varchar(255) NOT NULL DEFAULT '',
@@ -86,10 +82,10 @@ CREATE TABLE IF NOT EXISTS `mag_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_products_percents`
+-- Table structure for table `magv_products_percents`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_products_percents` (
+CREATE TABLE IF NOT EXISTS `magv_products_percents` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint(11) DEFAULT NULL,
   `sell_percent` float(10,2) DEFAULT NULL,
@@ -101,10 +97,10 @@ CREATE TABLE IF NOT EXISTS `mag_products_percents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_repared`
+-- Table structure for table `magv_repared`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_repared` (
+CREATE TABLE IF NOT EXISTS `magv_repared` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `price` bigint(20) NOT NULL DEFAULT '0',
@@ -119,10 +115,10 @@ CREATE TABLE IF NOT EXISTS `mag_repared` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_sales`
+-- Table structure for table `magv_sales`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_sales` (
+CREATE TABLE IF NOT EXISTS `magv_sales` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `price` bigint(20) NOT NULL DEFAULT '0',
@@ -139,10 +135,10 @@ CREATE TABLE IF NOT EXISTS `mag_sales` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_settings`
+-- Table structure for table `magv_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_settings` (
+CREATE TABLE IF NOT EXISTS `magv_settings` (
   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `value` varchar(255) NOT NULL DEFAULT '',
@@ -152,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `mag_settings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_users`
+-- Table structure for table `magv_users`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_users` (
+CREATE TABLE IF NOT EXISTS `magv_users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(60) NOT NULL DEFAULT '',
@@ -175,10 +171,10 @@ CREATE TABLE IF NOT EXISTS `mag_users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mag_workers`
+-- Table structure for table `magv_workers`
 --
 
-CREATE TABLE IF NOT EXISTS `mag_workers` (
+CREATE TABLE IF NOT EXISTS `magv_workers` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
   `work_role` int(3) DEFAULT NULL,

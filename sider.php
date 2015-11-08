@@ -1,5 +1,5 @@
 <div id="sider"> 
-<?php if (isset($_SESSION['magsales']['magazine_id'])) : ?>
+<?php if (isset($_SESSION['magvendo']['magazine_id'])) : ?>
   <?php if(has_worker_role(SALE)) : ?>
     <ul>
         <li><a href="index.php?p=sale"><?php _e('Sale'); ?></a></li>

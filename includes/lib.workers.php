@@ -3,7 +3,7 @@
 /**
  * File name: lib.workers.php
  * Copyright 2013 Iurie Nistor
- * This file is part of MagSales.
+ * This file is part of MagVendo.
  *
  * MagVendo is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -172,12 +172,12 @@ function has_worker_role($role, $user_id = '', $magazine_id = '')
 
     if (empty($magazine_id))
       {
-          $magazine_id = $_SESSION['magsales']['magazine_id'];
+          $magazine_id = $_SESSION['magvendo']['magazine_id'];
       }
 
     if (empty($user_id))
       {
-          $user_id = $_SESSION['magsales']['user_id'];
+          $user_id = $_SESSION['magvendo']['user_id'];
       }
      
 
@@ -254,7 +254,7 @@ function has_magazine($id)
     global $config;
 
     $query = "SELECT COUNT(*) as `number` FROM `".$config['db_prefix']."workers` 
-        WHERE `user_id` = '".$_SESSION['magsales']['user_id']."' AND `magazine_id` = '".$id."'";
+        WHERE `user_id` = '".$_SESSION['magvendo']['user_id']."' AND `magazine_id` = '".$id."'";
  
     $result = @mysql_query($query);
 

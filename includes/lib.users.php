@@ -283,18 +283,18 @@ function remove_user($id)
 function user_role()
 {
     // Verify user seeion role.
-    if (!isset($_SESSION['magsales']['user_role']))
+    if (!isset($_SESSION['magvendo']['user_role']))
       {
           return 0;
       }
 
-    return $_SESSION['magsales']['user_role'];
+    return $_SESSION['magvendo']['user_role'];
 }
 
 function is_role($role)
 {
     // Verify session variable.
-    if (!isset($_SESSION['magsales']['user_role']))
+    if (!isset($_SESSION['magvendo']['user_role']))
       {
           return FALSE; 
       }

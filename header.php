@@ -64,12 +64,12 @@ var old_goToToday = $.datepicker._gotoToday
 
 <div id="header">
     <ul class="top-menu">
-        <?php $user_data = get_user($_SESSION['magsales']['user_id']); ?>
+        <?php $user_data = get_user($_SESSION['magvendo']['user_id']); ?>
         <li><a class="user" href="#"><b><?php if (!empty($user_data['name'])) : ?><?php echo $user_data['name']; ?><?php else : ?><?php echo $user_data['username']; ?><?php endif; ?></b></a></li>
         <li><a class="logout" href="index.php?a=logout"><?php _e('Log out'); ?></a></li> 
     </ul>
-    <?php if (isset($_SESSION['magsales']['magazine_id'])) : ?>
-        <?php $magazine = get_magazine($_SESSION['magsales']['magazine_id']); ?>
+    <?php if (isset($_SESSION['magvendo']['magazine_id'])) : ?>
+        <?php $magazine = get_magazine($_SESSION['magvendo']['magazine_id']); ?>
     <?php endif; ?>
     <h1><a href="index.php"><?php echo MAGV_APP_NAME; ?></a><?php if(!empty($magazine)) : ?> <span> | <?php echo $magazine['name']; ?></span><?php endif; ?></h1>
 </div> <!-- #header -->

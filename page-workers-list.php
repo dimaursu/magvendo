@@ -41,7 +41,7 @@ if (isset($_POST['show']))
          <input type="search" name="search-input" autofocus="autofocus" placeholder="<?php _e('Search by workername or name'); ?>" value="" /> 
          <input type="submit" class="search-button" name="search" value="<?php _e('Search'); ?>" /> 
     </form></p-->
-    <?php $workers = get_workes($_SESSION['magsales']['magazine_id']); ?> 
+    <?php $workers = get_workes($_SESSION['magvendo']['magazine_id']); ?> 
     <p><b><?php _e('Period'); ?>: <?php echo date("d-m-Y", strtotime($date_from)).' &mdash; '.date("d-m-Y", strtotime($date_to)); ?></b></p>
     <table class="ls-table">
        <tr>
@@ -54,13 +54,13 @@ if (isset($_POST['show']))
            <?php if ($worker['status']) : ?>
                <?php continue; ?>
            <?php endif; ?>
-           <?php $worker_roles = get_worker_roles($worker['id'], $_SESSION['magsales']['magazine_id']); ?>
+           <?php $worker_roles = get_worker_roles($worker['id'], $_SESSION['magvendo']['magazine_id']); ?>
          <?php if (!empty($worker_roles)) : ?>      
-           <?php  $worker['worked_days'] = worked_days($worker['id'], $_SESSION['magsales']['magazine_id'], $date_from, $date_to); ?>
+           <?php  $worker['worked_days'] = worked_days($worker['id'], $_SESSION['magvendo']['magazine_id'], $date_from, $date_to); ?>
             <tr <?php if ($key % 2 == 0) : ?>class="even"<?php endif; ?>>
                <td><b><a href="index.php?p=edit-worker&id=<?php echo $worker['id']; ?>"><?php echo $worker['name']; ?></a></b></td> 
                <td>
-                 <?php $worker_salary = get_worker_salary($date_from, $date_to, $_SESSION['magsales']['magazine_id'], $worker['id']); ?> 
+                 <?php $worker_salary = get_worker_salary($date_from, $date_to, $_SESSION['magvendo']['magazine_id'], $worker['id']); ?> 
                  <table class="worker-roles">
                    <tr>  
                      <th><? _e('Worker role'); ?></th>

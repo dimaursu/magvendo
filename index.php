@@ -32,7 +32,7 @@ require_once 'configure.php';
 session_start();
 
 // Verify login.
-if (!isset($_SESSION['magsales']['login'])) {
+if (!isset($_SESSION['magvendo']['login'])) {
     header('Location: login.php');
     exit;
 }
@@ -100,7 +100,7 @@ if (!@mysql_query('SET names utf8'))
 if (isset($_GET['a']) && $_GET['a'] == 'logout')
   {
       // Remove session data.
-      unset($_SESSION['magsales']);
+      unset($_SESSION['magvendo']);
       @mysqli_close($db_link);
 
       // Redirect to login page.

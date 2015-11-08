@@ -3,7 +3,7 @@
 /**
  * File name: lib.reparation.php
  * Copyright 2013 Iurie Nistor
- * This file is part of MagSales.
+ * This file is part of MagVendo.
  *
  * MagVendo is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -108,8 +108,8 @@ function save_repared()
       {  
           $fields[] = "`date` = '".date('Y-m-d H:i:s')."'";  
       }
-    $fields[] = "`magazine_id` = '".$_SESSION['magsales']['magazine_id']."'";    
-    $fields[] = "`user_id` = '".$_SESSION['magsales']['user_id']."'";    
+    $fields[] = "`magazine_id` = '".$_SESSION['magvendo']['magazine_id']."'";    
+    $fields[] = "`user_id` = '".$_SESSION['magvendo']['user_id']."'";    
 
     // Prepare query for adding new sale to database. 
     $query = "INSERT INTO `".$config['db_prefix']."repared` 

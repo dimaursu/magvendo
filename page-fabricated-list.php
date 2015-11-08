@@ -7,7 +7,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && user_role() == ADMIN_ROLE)
   }
 else 
  {
-      $user_id = $_SESSION['magsales']['user_id'];     
+      $user_id = $_SESSION['magvendo']['user_id'];     
  }
 
 // Verify page variable.
@@ -78,7 +78,7 @@ else
 
 <div id="sales-list">
   <h2><?php _e("Fabricated products"); ?></h2>  
-  <?php if ($user_id != $_SESSION['magsales']['user_id']) : /* Don't show information for the current logged user */ ?>
+  <?php if ($user_id != $_SESSION['magvendo']['user_id']) : /* Don't show information for the current logged user */ ?>
       <?php $worker_detals = get_user($user_id); ?>
       <h3><?php _e('Worker'); ?> : <a href="index.php?p=user&id=<?php echo $user_id; ?>"><?php echo $worker_detals['name'] ?></a></h3>
   <?php endif; ?>
@@ -106,7 +106,7 @@ else
                <th class="actions"><?php _e('Actions'); ?></th>
              </tr> 
              <?php 
-                $products = get_fabricated($date_from, $date_to, $user_id, $_SESSION['magsales']['magazine_id']);
+                $products = get_fabricated($date_from, $date_to, $user_id, $_SESSION['magvendo']['magazine_id']);
                 $date = '';
                 $salary_total = 0;
                 $salary_by_date = 0;

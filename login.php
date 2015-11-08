@@ -98,10 +98,10 @@ function login()
     else
      {
          // Store session data.
-         $_SESSION['magsales']['login'] =  true;
-         $_SESSION['magsales']['user_id'] =  $user['id'];
-         $_SESSION['magsales']['user_role'] = $user['role'];
-         $_SESSION['magsales']['magazine_id'] = $_POST['magazine'];
+         $_SESSION['magvendo']['login'] =  true;
+         $_SESSION['magvendo']['user_id'] =  $user['id'];
+         $_SESSION['magvendo']['user_role'] = $user['role'];
+         $_SESSION['magvendo']['magazine_id'] = $_POST['magazine'];
        
          // Verify magazine.
          if (has_magazine($_POST['magazine']))   
@@ -112,7 +112,7 @@ function login()
            }
         else
           {
-              unset($_SESSION['magsales']);
+              unset($_SESSION['magvendo']);
               return _tr('The magazine is not corect'); 
           }  
      }

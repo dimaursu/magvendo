@@ -21,7 +21,6 @@
  */
 
 define("MAGVENDO", TRUE);
-define("MAGSALES", TRUE); // For compatibility.
 define("MAGV_VERSION_MAJOR", 0);
 define("MAGV_VERSION_MINOR", 9);
 define("MAGV_VERSION_PATCH", 0);
@@ -59,8 +58,8 @@ require_once 'includes/lib.cards.php';
 
 // Connect to the database.
 $db_link = @mysql_connect(
-            $config['hostname'], 
-            $config['db_username'], 
+            $config['hostname'],
+            $config['db_username'],
             $config['db_password']
 );
 
@@ -68,13 +67,13 @@ $db_link = @mysql_connect(
 if (!$db_link)
   {
       // Print the database eroor.
-      echo "Database connection error: " . mysql_error(); 
+      echo "Database connection error: " . mysql_error();
 
       die();
 }
 
-// Select the database. 
-if (!@mysql_select_db($config['database'])) 
+// Select the database.
+if (!@mysql_select_db($config['database']))
 {
     // Print the database error.
     echo "Database selection error: " . mysql_error();
@@ -88,7 +87,7 @@ if (!@mysql_select_db($config['database']))
 if (!@mysql_query('SET names utf8'))
 {
     // Set the database error variable.
-    echo "Database error (set names): " . mysql_error(); 
+    echo "Database error (set names): " . mysql_error();
 
     // Disconnect from the database.
     @mysqli_close($db_link);

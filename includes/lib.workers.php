@@ -5,7 +5,7 @@
  * Copyright 2013 Iurie Nistor
  * This file is part of MagSales.
  *
- * LightStore is free software; you can redistribute it and/or modify
+ * MagVendo is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.

@@ -124,13 +124,13 @@ function login()
 <html dir="ltr" lang="en-US">
 <head>
     <meta charset="UTF-8" />
-    <title>MagSales - Login</title>
+    <title>MagVendo - Login</title>
     <link rel='stylesheet' href='css/login-page.css' type='text/css' media='all' />
 </head>
 
 <body>
 
-<h1 id="header"><a href="index.php">MagSales</a></h1>
+<h1 id="header"><a href="index.php">MagVendo</a></h1>
 
 <form id="login-form" enctype="multipart/form-data" action="login.php" method="post">
 <?php if (!empty($login_error)) :?>

@@ -21,14 +21,13 @@
  */
 
 $config = array();
-
 // Database information.
 $config['hostname'] = 'localhost';
-$config['database'] = 'magvendo';
+$config['database'] = "magv_dev";
 $config['db_username'] = 'root';
 $config['db_password'] = 'cactus';
 $config['db_prefix'] = 'magv_';
 
 // Define language variable.
-define("LSLANG", "ru");
+define("LSLANG", "ro");
 

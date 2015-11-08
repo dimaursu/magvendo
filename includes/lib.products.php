@@ -32,7 +32,7 @@
  * @return
  *   Return an array contaning the product data, otherwise it return an empty array.
  */
-function get_product($id)
+function magv_get_product($id)
 {
     global $config;
 
@@ -61,7 +61,7 @@ function get_product($id)
     return $product;
 }
 
-function get_products($page = '', $args = array(), $items_per_page = 10)
+function magv_get_products($page = '', $args = array(), $items_per_page = 10)
 {
     global $config;
 
@@ -129,7 +129,7 @@ function get_products($page = '', $args = array(), $items_per_page = 10)
     return $products;
 }
 
-function products_number($args = array())
+function magv_products_number($args = array())
 {
     global $config;
 
@@ -193,7 +193,7 @@ function products_number($args = array())
  * @return
  *   Returns a string contaning the error, othewise an empty string.
  */
-function save_product()
+function magv_save_product()
 {
     global $config;
 
@@ -203,50 +203,12 @@ function save_product()
           return _tr("Name field is empty.");
       }
 
-    // Verify price variable.
-    if (empty($_POST['price']))
-      {
-          return _tr("Price field is empty.");
-      }
-
-    // Verify if price is number.
-    if (!is_numeric($_POST['price']))
-      {
-          return _tr("Price should be a number.");
-      }
-
-
-    // Verify price variable.
-    if (empty($_POST['quantity']))
-      {
-          return _tr("Quantity field is empty.");
-      }
-
-    // Verify if price is number.
-    if (!is_numeric($_POST['quantity']))
-      {
-          return _tr("Quantity should be a number.");
-      }
-
     // Create data array.
     $fields[] = "`name` = '".$_POST['name']."'";
-    $fields[] = "`price` = '".$_POST['price']."'";
-    $fields[] = "`quantity` = '".$_POST['quantity']."'";
-    $fields[] = "`category_id` = '".$_POST['category']."'";
     if (!empty($_POST['description']))
       {
           $fields[] = "`description` = '".$_POST['description']."'";
       }
-    if (isset($_POST['archived']))
-      {
-          $fields[] = "`archived` = '".(1)."'";
-      }
-    else
-      {
-          $fields[] = "`archived` = '".(0)."'";
-      }
-
-    $fields[] = "`registered_date` = '".date('Y-m-d H:i:s')."'";
 
     // Verify product id variable.
     if (!isset($_GET['id']) || !is_numeric($_GET['id']))
@@ -274,7 +236,7 @@ function save_product()
     return '';
 }
 
-function archive_product($id, $archived = FALSE)
+function magv_archive_product($id, $archived = FALSE)
 {    
     global $config;
 
@@ -298,4 +260,15 @@ function archive_product($id, $archived = FALSE)
       } 
 
     return TRUE;    
+}
+
+function magv_remove_product($id)
+{
+    global $config;
+
+    // Define query.
+    $query = "DELETE FROM `".$config['db_prefix']."products` 
+        WHERE `id` = '".$id."'";
+
+    @mysql_query($query);
 }

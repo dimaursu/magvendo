@@ -59,7 +59,7 @@ else
 
 ?>
 
-<?php $product = get_category($product_id); ?>
+<?php $product = magv_get_product($product_id); ?>
 
 <h2><a href="index.php?p=statistics"><?php _e('Statistics'); ?></a>: <?php _e('Price'); ?> (<?php echo $product['name']; ?>)</h2>
 

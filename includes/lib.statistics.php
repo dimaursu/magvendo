@@ -56,7 +56,7 @@ function mags_sales_by_products($args = array())
         . str_replace("s.", "s1.", $where) .")) * 100 as percent, 
         SUM(s.quantity) as quantity, SUM(s.quantity*s.price) as totprice
         FROM ".$config['db_prefix']."sales s
-        LEFT JOIN ". $config['db_prefix']. "categories c ON s.product_id = c.id
+        LEFT JOIN ". $config['db_prefix']. "products c ON s.product_id = c.id
         " . $where . " GROUP BY s.product_id ORDER BY percent DESC";
 
    $result = @mysql_query($sql);

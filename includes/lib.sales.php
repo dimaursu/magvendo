@@ -27,11 +27,11 @@ function get_sales($date_from, $date_to, $user_id = '', $magazine_id = '')
     if (!empty($user_id) && !empty($magazine_id))
       {
           // Prepare query to get the user sales from a magazine. 
-          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, 
+          $query = "SELECT s.id, c.name as name, s.price, s.quantity, 
               s.discount, s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
               s.salary_percent
               FROM ".$config['db_prefix']."sales s 
-              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              LEFT JOIN ".$config['db_prefix']."products c ON s.product_id = c.id 
               WHERE CAST(s.date AS DATE) >= '".$date_from."'
               AND s.user_id = '".$user_id."' AND s.magazine_id = '".$magazine_id."' 
               AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC";   
@@ -39,11 +39,11 @@ function get_sales($date_from, $date_to, $user_id = '', $magazine_id = '')
     else if (empty($user_id) && !empty($magazine_id))
      {
           // Prepare query to get the sales from a magazine. 
-          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount,
+          $query = "SELECT s.id, c.name as name, s.price, s.quantity, s.discount,
               s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
               s.salary_percent
               FROM ".$config['db_prefix']."sales s  
-              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              LEFT JOIN ".$config['db_prefix']."products c ON s.product_id = c.id 
               WHERE CAST(s.date AS DATE) >= '".$date_from."'
               AND s.magazine_id = '".$magazine_id."' 
               AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC";   
@@ -51,23 +51,23 @@ function get_sales($date_from, $date_to, $user_id = '', $magazine_id = '')
     else if (!empty($user_id) && empty($magazine_id))
      {
           // Prepare query to get the users sales from all magazines. 
-          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount, 
+          $query = "SELECT s.id, c.name as name, s.price, s.quantity, s.discount, 
               s.magazine_id, s.user_id, CAST(s.date AS DATE) as date, 
               s.salary_percent
               FROM ".$config['db_prefix']."sales s  
-              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              LEFT JOIN ".$config['db_prefix']."products c ON s.product_id = c.id 
               WHERE CAST(s.date AS DATE) >= '".$date_from."'
               AND s.user_id = '".$user_id."' 
               AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC"; 
      }
     else
-     {
+     {     
           // Prepare query to get all sales from all magazines. 
-          $query = "SELECT s.id, IFNULL(c.name, s.name) as name, s.price, s.quantity, s.discount,
+          $query = "SELECT s.id, c.name, s.price, s.quantity, s.discount,
               s.magazine_id, s.user_id, CAST(s.date AS DATE) as date,
               s.salary_percent
               FROM ".$config['db_prefix']."sales s  
-              LEFT JOIN ".$config['db_prefix']."categories c ON s.product_id = c.id 
+              LEFT JOIN ".$config['db_prefix']."products c ON s.product_id = c.id 
               WHERE CAST(s.date AS DATE) >= '".$date_from."'
               AND CAST(s.date AS DATE) <= '".$date_to."' ORDER BY s.date DESC"; 
      }
@@ -185,7 +185,7 @@ function save_sale()
           return _tr("Percent from sale must be a number.");
       }
 
-    $product = get_category($_POST['product']);
+    $product = magv_get_product($_POST['product']);
 
     if (empty($product))
       {

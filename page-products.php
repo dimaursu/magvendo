@@ -9,7 +9,7 @@ if (isset($_GET['a'])
     && is_numeric($_GET['id']))
   {
       // Remove user.
-      remove_category($_GET['id']);
+      magv_remove_product($_GET['id']);
   }
 
 if (isset($_GET['page']) && is_numeric($_GET['page']))

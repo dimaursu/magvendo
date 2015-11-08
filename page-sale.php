@@ -14,7 +14,7 @@
     <table>
     <tr>
         <td class="first">
-          <?php $categories = get_categories(); ?>
+          <?php $categories = magv_get_products(); ?>
             <?php _e('Product name'); ?><sup>*</sup>:
         </td>
         <td>

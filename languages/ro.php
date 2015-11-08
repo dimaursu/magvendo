@@ -216,7 +216,7 @@ $language = array(
 'Search by product name' =>
 'Caută după numele produsului',
 
-'Add products' =>
+'Add product' =>
 'Adaugă produsul',
 
 'All categories' =>

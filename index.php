@@ -137,7 +137,7 @@ if (empty($_GET['p'])) {
          'workers-list',
          'sales-all',
          'categories',
-         'add-category',
+         'add-product',
          'edit-category',
          'stats-price',
          'add-magazine',
